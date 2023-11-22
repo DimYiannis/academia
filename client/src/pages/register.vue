@@ -21,12 +21,10 @@
       <div v-if="passwordError" class="error">{{ passwordError }}</div>
 
       <div class="">
-        <button class=" ">Join Now</button>
+        <button @click="register" class=" ">Join Now</button>
         <div class="place-self-start text-[10px] flex gap-1">
           <p>Already have an account?</p>
-          <a
-            class="cursor-pointer underline underline-offset-1"
-            href="/login"
+          <a class="cursor-pointer underline underline-offset-1" href="/login"
             >log in</a
           >
         </div>
@@ -36,6 +34,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -50,7 +49,7 @@ export default {
     handleSubmit() {
       //validate password
       this.passwordError =
-        this.password.length >= 12
+        this.password.length >= 4
           ? ""
           : "Password must be at least 12 characters long";
       if (!this.passwordError) {
@@ -61,6 +60,22 @@ export default {
     },
     ToggleLogin() {
       this.$emit("toggle-login");
+    },
+    register() {
+      axios
+        .post("http://localhost:5000/api/v1/auth/register", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response);
+          // Optionally, you can redirect to another page or show a success message.
+        })
+        .catch((error) => {
+          console.error("Registration error:", error.response.data);
+          // Handle the error and provide feedback to the user.
+        });
     },
   },
 };
