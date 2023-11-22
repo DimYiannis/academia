@@ -1,5 +1,11 @@
 <template>
   <div class="grid h-fit mt-10 justify-center">
+    <p
+      class="bg-sky-500/40 text-white rounded-lg p-3 mt-3"
+      v-show="showError"
+    >
+      {{ errormsg }}
+    </p>
     <form class="grid gap-5 mx-10 w-fit" @submit.prevent="handleSubmit">
       <h1 class="text-center font-semibold text-lg">
         Why wait? Sign up now and start shopping
@@ -41,8 +47,9 @@ export default {
       name: "",
       email: "",
       password: "",
-      terms: false,
+      showError: false,
       passwordError: "",
+      errormsg: "",
     };
   },
   methods: {
@@ -52,11 +59,11 @@ export default {
         this.password.length >= 4
           ? ""
           : "Password must be at least 12 characters long";
-      if (!this.passwordError) {
-        console.log("email: ", this.email);
-        console.log("password: ", this.password);
-        console.log("terms accepted: ", this.terms);
-      }
+      // if (!this.passwordError) {
+      //   console.log("email: ", this.email);
+      //   console.log("password: ", this.password);
+      //   console.log("terms accepted: ", this.terms);
+      // }
     },
     ToggleLogin() {
       this.$emit("toggle-login");
@@ -70,13 +77,33 @@ export default {
         })
         .then((response) => {
           console.log(response);
+          showAlert({ type: "success" });
           // Optionally, you can redirect to another page or show a success message.
         })
         .catch((error) => {
           console.error("Registration error:", error.response.data);
           // Handle the error and provide feedback to the user.
+          this.errormsg = error.response.data.msg;
+          
+          // show the tooltip
+          this.showError = true;
+          // hide the tooltip after 5 seconds
+          setTimeout(() => {
+            this.showError = false;
+          }, 5000);
         });
     },
   },
 };
 </script>
+
+<style>
+/* Tooltip styles */
+[v-show] {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+[v-show].active {
+  opacity: 1;
+}
+</style>
