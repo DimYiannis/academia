@@ -9,7 +9,11 @@ const app = express();
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
-const cors = require('cors');
+const rateLimiter = require("express-rate-limit");
+const helmet = require("helmet");
+const xss = require("xss-clean");
+const cors = require("cors");
+const mongoSanitize = require("express-mongo-sanitize");
 
 //DB
 const connectDB = require("./db/connect");
@@ -18,32 +22,42 @@ const connectDB = require("./db/connect");
 const authRouter = require("./routes/authRoutes");
 const userRouter = require("./routes/userRoutes");
 
-
 //middleware
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
+app.set("trust proxy", 1);
+app.use(
+  rateLimiter({
+    windowMs: 15 * 60 * 1000,
+    max: 60,
+  })
+);
+
 app.use(morgan("tiny"));
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(cookieParser(process.env.JWT_SECRET));
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
+
+app.get("/api/v1", (req, res) => {
+  console.log(req.headers);
+  console.log(req.signedCookies);
+  res.send("orbit");
+});
 
 app.use(express.static("./public"));
 app.use(fileUpload());
 
-app.get("/", (req, res) => {
-  console.log(req.cookies);
-  res.send("e-commerce api");
-});
-
-app.get("/api/v1", (req, res) => {
-  console.log(req.signedCookies);
-  res.send("e-commerce api");
-});
-
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
-
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

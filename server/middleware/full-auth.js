@@ -14,7 +14,7 @@ const authenticateUser = async (req, res, next) => {
   }
 
   if (!token) {
-    throw new CustomError.UnauthenticatedError('Authentication invalid');
+    throw new CustomError.UnauthenticatedError('Token missing or invalid');
   }
   try {
     const payload = isTokenValid(token);

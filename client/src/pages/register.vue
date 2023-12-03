@@ -65,9 +65,7 @@ export default {
       //   console.log("terms accepted: ", this.terms);
       // }
     },
-    ToggleLogin() {
-      this.$emit("toggle-login");
-    },
+    
     register() {
       axios
         .post("http://localhost:5000/api/v1/auth/register", {
@@ -76,15 +74,18 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          console.log(response);
-          showAlert({ type: "success" });
-          // Optionally, you can redirect to another page or show a success message.
+          console.log('Redirecting to login page');
+          console.log(response.data);
+          alert('Welcome to orbit!');
+          // redirect to another page or show a success message.
+          this.$router.push({ name: 'login' });
         })
         .catch((error) => {
-          console.error("Registration error:", error.response.data);
+          console.error("Registration error:", error.response);
           // Handle the error and provide feedback to the user.
           this.errormsg = error.response.data.msg;
-          
+          console.log(error.response.data);
+
           // show the tooltip
           this.showError = true;
           // hide the tooltip after 5 seconds
