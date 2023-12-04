@@ -4,7 +4,7 @@
     <div class="flex mt-10 ml-32 ">
 
       <div class=" w-1/2 mt-32 pl-5 ">
-        <h1 class="text-3xl text-[#388aef] font-bold">Orbit</h1>
+        <h1 class="text-3xl text-[#388aef] font-bold">Academia</h1>
         <p class="my-5 text-start text-lg">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni,
           eligendi. Obcaecati ducimus error repellendus, necessitatibus eum

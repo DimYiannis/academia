@@ -3,6 +3,8 @@ import home from '../pages/home.vue'
 import login from '../pages/login.vue'
 import register from '../pages/register.vue'
 import dashboard from '../pages/dashboard.vue'
+import post from '../pages/post.vue'
+import profile from '../pages/profile.vue'
 
 
 
@@ -26,7 +28,21 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: dashboard,
+    children: [
+      //nested routes for the dashboard
+      {
+        path: '/dashboard/profile',
+        name: 'profile',
+        component: profile,
+      },
+      {
+        path: '/dashboard',
+        name: 'post',
+        component: post,
+      },
+    ],
   },
+  
 ]
 
 const router = createRouter({
