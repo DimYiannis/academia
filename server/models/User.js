@@ -28,6 +28,13 @@ const UserSchema = new mongoose.Schema({
     enum: ["admin", "user"],
     default: "user",
   },
+  info: {
+    type: String,
+  },
+  image: {
+    type: String,
+    default: '/uploads/example.jpeg',
+  },
   verified: Date,
   passwordToken: {
     type: String,
@@ -35,7 +42,7 @@ const UserSchema = new mongoose.Schema({
   passwordTokenExpirationDate: {
     type: Date,
   },
-  erificationToken: String,
+  verificationToken: String,
   isVerified: {
     type: Boolean,
     default: false,

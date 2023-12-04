@@ -6,21 +6,22 @@
     </nav>
 
     <main class="h-screen overflow-hidden overflow-y-auto overscroll-auto">
-      <div class="post border p-4 mb-4 " v-for="i of data">
-      <div class="grid post-header flex items-center mb-2">
-        <img alt="Author Avatar" class="avatar mr-4" />
+      <div class="post border p-4 mb-4 " v-for="i of posts">
+      <div class="grid post-header items-center mb-2">
         <h1>
-          {{ i.title }}
+          Title: {{ i.title }}
         </h1>
-        <h2>Author {{ i.authorString }}</h2>
-        <h3>Year {{ i.pubYear }}</h3>
+        <h2>Author: {{ i.authors }}</h2>
+        <h2>University: {{ i.university }}</h2>
+        <h3>Year: {{ i.date }}</h3>
         <div class="author-info">
           <span class="author-name font-bold">{{}}</span>
           <span class="post-time text-gray-700">{{}}</span>
         </div>
       </div>
       <div class="post-content mb-2">
-        <p>{{}}</p>
+        <p>Abstract: {{i.abstract}}</p>
+        <h3>doi: {{ i.doi }}</h3>
         <!-- You can add other multimedia content (images, videos) here -->
       </div>
       <div class="post-actions">
@@ -37,7 +38,7 @@
 <script>
 export default {
   props: {
-    data: {
+    posts: {
       type: Object,
       required: true,
     },
@@ -62,6 +63,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* No custom styles in this example */
-</style>
+

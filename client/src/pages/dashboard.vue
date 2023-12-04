@@ -3,7 +3,7 @@
     <!--SideBar-->
     <aside class="grid gap-2">
       <div class="grid gap-2">
-        <h1 class="text-3xl mt-4">Hello there: {{ name }}</h1>
+        <h1 class="text-3xl mt-4">Hello there: {{ user.name }}</h1>
         <div class="flex gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,30 +71,10 @@
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="1.5"
-              d="M21 8.25c0-2.485-2.099-4.5-4.687-4.5c-1.936 
-              0-3.598 1.126-4.313 2.733c-.715-1.607-2.377-2.733-4.312-2.733C5.098 
-              3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+              d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
             />
           </svg>
-          <router-link to="/dashboard">Favorite</router-link>
-        </div>
-        <div class="flex gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227c1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443a48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
-            />
-          </svg>
-          <router-link to="/dashboard">comments</router-link>
+          <router-link to="/dashboard">Messages</router-link>
         </div>
         <div class="flex gap-2">
           <svg
@@ -161,7 +141,7 @@
     <!--Main content-->
     <main>
       <div class="h-screen overflow-hidden overflow-y-auto overscroll-auto">
-        <router-view :data="data"></router-view>
+        <router-view :posts="posts" :user="user"></router-view>
       </div>
     </main>
   </div>
@@ -175,16 +155,15 @@ export default {
       name: "",
       role: "",
       userId: "",
-      data: [],
+      user: "",
+      posts: [],
     };
   },
-  components: {
-    
-  },
+  components: {},
   mounted() {
     // Invoke getuser method when the component is mounted
     this.getuser();
-    this.getdata();
+    //this.getposts();
   },
   methods: {
     async getuser() {
@@ -196,13 +175,12 @@ export default {
           }
         );
 
-        const user = response.data.user;
-
-        this.name = user.name;
-        this.userId = user.userId;
-        this.role = user.role;
+        this.user = response.data.user;
+        console.log(this.user);
       } catch (error) {
         console.error("Error fetching user information:", error);
+        console.error("Error response data:", error.response.data);
+        console.log("Response headers:", error.response.headers);
       }
     },
     logout() {
@@ -217,17 +195,17 @@ export default {
         console.error("Error:", error);
       }
     },
-    getdata() {
-      try {
-        axios.get("https://dummyjson.com/posts").then((response) => {
-          console.log(response.data.posts);
-          this.data = response.data.posts;
-          console.log(this.data);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    // async getposts() {
+    //   try {
+    //     const response = await axios.get("http://localhost:5000/api/v1/posts", {
+    //       withCredentials: true,
+    //     });
+
+    //     this.posts = response.data.posts;
+    //   } catch (error) {
+    //     console.error(error.response.data);
+    //   }
+    // },
   },
 };
 </script>

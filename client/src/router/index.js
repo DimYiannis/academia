@@ -5,6 +5,7 @@ import register from '../pages/register.vue'
 import dashboard from '../pages/dashboard.vue'
 import post from '../pages/post.vue'
 import profile from '../pages/profile.vue'
+//import article from '../pages/article.vue'
 
 
 
@@ -40,6 +41,11 @@ const routes = [
         name: 'post',
         component: post,
       },
+      // {
+      //   path: '/dashboard/articles/:id',
+      //   name: 'article',
+      //   component: article,
+      // },
     ],
   },
   

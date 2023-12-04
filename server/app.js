@@ -21,6 +21,7 @@ const connectDB = require("./db/connect");
 // routers
 const authRouter = require("./routes/authRoutes");
 const userRouter = require("./routes/userRoutes");
+const postRouter = require("./routes/postRoutes");
 
 //middleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -46,11 +47,11 @@ app.use(cookieParser(process.env.JWT_SECRET));
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
-
+  
 app.get("/api/v1", (req, res) => {
-  console.log(req.headers);
+  console.log(req.headers.cookie);
   console.log(req.signedCookies);
-  res.send("orbit");
+  res.send("academia");
 });
 
 app.use(express.static("./public"));
@@ -58,6 +59,7 @@ app.use(fileUpload());
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/posts", postRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

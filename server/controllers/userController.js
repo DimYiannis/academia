@@ -19,7 +19,11 @@ const getSingleUser = async (req, res) => {
 };
 
 const showCurrentUser = async (req, res) => {
-  res.status(StatusCodes.OK).json({ user: req.user });
+  const user = await User.findOne({ _id: req.user.userId }).select("-password");
+  res.status(StatusCodes.OK).json({ user});
+
+  console.log(req.signedCookies.token);
+  
 };
 
 // update user with findOneAndUpdate
