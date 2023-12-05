@@ -20,7 +20,7 @@
               d="M15.75 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
             />
           </svg>
-          <router-link to="/dashboard/profile">Profile</router-link>
+          <router-link to="/profile">Profile</router-link>
         </div>
         <div class="flex gap-2">
           <svg
@@ -38,7 +38,7 @@
               d="m21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
             />
           </svg>
-          <router-link to="/dashboard">Explore</router-link>
+          <router-link to="/posts">Explore</router-link>
         </div>
         <div class="flex gap-2">
           <svg

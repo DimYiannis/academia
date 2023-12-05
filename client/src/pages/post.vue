@@ -9,7 +9,7 @@
       <div class="post border p-4 mb-4 " v-for="i of posts">
       <div class="grid post-header items-center mb-2">
         <h1>
-          Title: {{ i.title }}
+          Title: <router-link :to="'/article/' + i.doi">{{ i.title }}</router-link>
         </h1>
         <h2>Author: {{ i.authors }}</h2>
         <h2>University: {{ i.university }}</h2>

@@ -5,7 +5,7 @@ import register from '../pages/register.vue'
 import dashboard from '../pages/dashboard.vue'
 import post from '../pages/post.vue'
 import profile from '../pages/profile.vue'
-//import article from '../pages/article.vue'
+import article from '../pages/article.vue'
 
 
 
@@ -32,20 +32,20 @@ const routes = [
     children: [
       //nested routes for the dashboard
       {
-        path: '/dashboard/profile',
+        path: '/profile',
         name: 'profile',
         component: profile,
       },
       {
-        path: '/dashboard',
+        path: '/posts',
         name: 'post',
         component: post,
       },
-      // {
-      //   path: '/dashboard/articles/:id',
-      //   name: 'article',
-      //   component: article,
-      // },
+      {
+        path: '/article/:doi',
+        name: 'article',
+        component: article,
+      },
     ],
   },
   
