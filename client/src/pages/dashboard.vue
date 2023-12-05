@@ -163,7 +163,7 @@ export default {
   mounted() {
     // Invoke getuser method when the component is mounted
     this.getuser();
-    //this.getposts();
+    this.getposts();
   },
   methods: {
     async getuser() {
@@ -195,17 +195,17 @@ export default {
         console.error("Error:", error);
       }
     },
-    // async getposts() {
-    //   try {
-    //     const response = await axios.get("http://localhost:5000/api/v1/posts", {
-    //       withCredentials: true,
-    //     });
+    async getposts() {
+      try {
+        const response = await axios.get("http://localhost:5000/api/v1/posts", {
+          withCredentials: true,
+        });
 
-    //     this.posts = response.data.posts;
-    //   } catch (error) {
-    //     console.error(error.response.data);
-    //   }
-    // },
+        this.posts = response.data.posts;
+      } catch (error) {
+        console.error(error.response.data);
+      }
+    },
   },
 };
 </script>

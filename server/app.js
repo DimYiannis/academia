@@ -37,24 +37,25 @@ app.use(
 
 app.use(morgan("tiny"));
 app.use(express.json());
+app.use(cookieParser(process.env.JWT_SECRET));
+app.use(express.static("./public"))
 app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
   })
 );
-app.use(cookieParser(process.env.JWT_SECRET));
+
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
   
 app.get("/api/v1", (req, res) => {
-  console.log(req.headers.cookie);
   console.log(req.signedCookies);
   res.send("academia");
 });
 
-app.use(express.static("./public"));
+
 app.use(fileUpload());
 
 app.use("/api/v1/auth", authRouter);

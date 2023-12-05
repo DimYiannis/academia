@@ -60,7 +60,9 @@ export default {
         .post("http://localhost:5000/api/v1/auth/login", {
           email: this.email,
           password: this.password,
-        })
+        },
+        {withCredentials: true,})//Without this option, cookies will not be sent.
+   
         .then((response) => {
           console.log(response);
           console.log(response.data.user);
