@@ -1,7 +1,7 @@
 <template>
   <div class="grid">
     <nav class="mb-10 mt-6">
-      <div class="flex relative mx-2 rounded-3xl border-2 
+      <div class="flex relative w-1/2 mx-2 rounded-3xl border-2 
       border-[#388aef] group p-1 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -46,8 +46,9 @@
       <div class="filter"></div>
     </nav>
 
-    <main class="h-screen overflow-hidden overflow-y-auto overscroll-auto">
-      <div class="post border p-4 mb-4" v-for="i of posts">
+    <main class="h-screen overflow-hidden overflow-y-auto 
+    overscroll-auto">
+      <div class="post border p-4 mb-4 rounded-3xl" v-for="i of posts">
         <div class="grid post-header items-center mb-2">
           <h1>
             Title:

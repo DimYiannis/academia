@@ -1,8 +1,8 @@
 <template>
   <div class="flex gap-10 ">
     <!--SideBar-->
-    <aside class="grid gap-2 mt-12">
-      <div class="grid gap-2">
+    <aside class="grid gap-2 mt-12 border-r-2">
+      <div class="grid gap-2 mr-2">
         <div class="flex gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"

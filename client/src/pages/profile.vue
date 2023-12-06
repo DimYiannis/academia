@@ -1,11 +1,11 @@
 <template>
-  <div class="grid gap-2 mt-8">
+  <div class="grid gap-2 mt-8 w-full">
     <div>
-      <h1 class="text-xl mt-4 capitalize">Hello there: {{ user.name }}</h1>
+      <h1 class="text-xl mt-4 capitalize border-b-2 ">Hello there: {{ user.name }}</h1>
     </div>
 
-    <div>
-      <img class="w-full" :src="user.image" />
+    <div class="mt-2">
+      <img class="w-[700px] rounded-md" :src="user.image" />
     </div>
     <div class="relative">
       <div class="flex justify-between items-start">
@@ -18,20 +18,21 @@
         </div>
         <div>
           <!--edit prof-->
-          <button class="absolute right-0">Edit Profile</button>
+          <nav class="mt-6 flex text-lg font-semobold absolute right-0">
+            <button class="">Posts</button>
+            <button class="">Likes</button>
+            <button class="">Edit Profile</button>
+          </nav>  
         </div>
       </div>
     </div>
 
-    <div class="mt-20">
+    <div class="mt-20 border-b-2 pb-3">
       <h1 class="text-3xl capitalize">{{ user.name }}</h1>
-      <h2 class="text-lg">{{ user.info }}</h2>
+      <h2 class="text-lg mt-3">{{ user.info }}</h2>
     </div>
   </div>
-  <nav>
-    <button>Posts</button>
-    <button>Likes</button>
-  </nav>
+
   <section>
     <!--content-->
   </section>
