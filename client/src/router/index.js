@@ -7,6 +7,8 @@ import post from '../pages/post.vue'
 import profile from '../pages/profile.vue'
 import article from '../pages/article.vue'
 import messages from '../pages/messages.vue'
+import bookmarks from '../pages/bookmarks.vue'
+import sharedposts from '../pages/sharedposts.vue'
 
 
 
@@ -51,6 +53,16 @@ const routes = [
         path: '/messages',
         name: 'messages',
         component: messages,
+      },
+      {
+        path: '/bookmarks',
+        name: 'bookmarks',
+        component: bookmarks,
+      },
+      {
+        path: '/sharedposts',
+        name: 'sharedposts',
+        component: sharedposts,
       },
     ],
   },
