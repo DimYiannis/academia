@@ -1,9 +1,8 @@
 <template>
-  <div class="flex gap-10 m-2">
+  <div class="flex gap-10 ">
     <!--SideBar-->
-    <aside class="grid gap-2">
+    <aside class="grid gap-2 mt-12">
       <div class="grid gap-2">
-        <h1 class="text-3xl mt-4">Hello there: {{ user.name }}</h1>
         <div class="flex gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"

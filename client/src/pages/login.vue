@@ -69,7 +69,7 @@ export default {
           alert("Welcome back!");
 
           //redirect to dashboard page.
-          this.$router.push({ name: "dashboard" });
+          this.$router.push({ name: "post" });
         })
         .catch((error) => {
           console.error("Registration error:", error.response.data);
