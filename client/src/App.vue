@@ -7,7 +7,7 @@
 
   <!--router -->
   <RouterView> </RouterView>
-  <footer></footer>
+  
 </template>
 
 <script></script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div class="grid ">
     <nav class="mb-10 mt-6">
       <div class="flex relative w-1/2 mx-2 rounded-3xl border-2 
       border-[#388aef] group p-1 ">
@@ -50,16 +50,15 @@
     overscroll-auto">
       <div class="post border p-4 mb-4 rounded-3xl" v-for="i of posts">
         <div class="grid post-header items-center mb-2">
-          <h1>
-            Title:
+          <h1 class="text-lg font-semibold">
             <router-link
-              class="underline decoration-sky-500"
+              class="underline decoration-sky-500 capitalize"
               :to="'/article/' + i.doi"
               >{{ i.title }}</router-link
             >
           </h1>
           <h2>Author: {{ i.authors }}</h2>
-          <h2>University: {{ i.university }}</h2>
+          <h2>Institutions: {{ i.university }}</h2>
           <h3>Year: {{ i.date }}</h3>
           <div class="author-info">
             <span class="author-name font-bold">{{}}</span>
