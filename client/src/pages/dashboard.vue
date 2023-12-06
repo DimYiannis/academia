@@ -2,7 +2,7 @@
   <div class="flex gap-10 ">
     <!--SideBar-->
     <aside class="grid gap-2 mt-12 border-r-2">
-      <div class="grid gap-2 mr-2">
+      <div class="grid gap-2 mr-12 ">
         <div class="flex gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@
               d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
             />
           </svg>
-          <router-link to="/dashboard">Messages</router-link>
+          <router-link to="/messages">Messages</router-link>
         </div>
         <div class="flex gap-2">
           <svg
@@ -109,7 +109,7 @@
               d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m-6 3.75l3 3m0 0l3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
             />
           </svg>
-          <router-link to="/dashboard">Submitted Posts</router-link>
+          <router-link to="/dashboard">Shared Posts</router-link>
         </div>
         <div class="flex gap-2">
           <svg
@@ -139,7 +139,7 @@
     </aside>
     <!--Main content-->
     <main>
-      <div class="h-screen overflow-hidden overflow-y-auto overscroll-auto">
+      <div class="h-screen overflow-hidden overscroll-none">
         <router-view :posts="posts" :user="user"></router-view>
       </div>
     </main>

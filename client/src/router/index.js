@@ -6,6 +6,7 @@ import dashboard from '../pages/dashboard.vue'
 import post from '../pages/post.vue'
 import profile from '../pages/profile.vue'
 import article from '../pages/article.vue'
+import messages from '../pages/messages.vue'
 
 
 
@@ -45,6 +46,11 @@ const routes = [
         path: '/article/:doi',
         name: 'article',
         component: article,
+      },
+      {
+        path: '/messages',
+        name: 'messages',
+        component: messages,
       },
     ],
   },
