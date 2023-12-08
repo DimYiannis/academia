@@ -1,5 +1,5 @@
 <template>
-  <div class="grid mx-5">
+  <div class="grid mx-5 mt-12  ">
     <div class="grid">
       <div class="flex justify-between">
         <h4>Published on: {{ this.post.date }} <br /></h4>

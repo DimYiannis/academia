@@ -117,7 +117,7 @@
     </aside>
     <!--Main content-->
     <main class="w-full">
-      <div class="h-screen overflow-hidden overscroll-none">
+      <div class="h-screen  overflow-auto">
         <router-view :posts="posts" :user="user" :shownotif="shownotif"></router-view>
       </div>
     </main>

@@ -5,42 +5,38 @@ const CustomError = require("../errors");
 
 
 const createsharedpost = async (req, res) => {
-  const { title, post: sharedposts } = req.body;
+  const { title, post: postId } = req.body;
 
-  let sharedpostsItems = [];
+  const dbPost = await Post.findOne({ _id: postId });
 
-  for (const item of sharedposts) {
-    const postId = item.post;
-    const dbPost = await Post.findOne({ _id: postId });
-    
-    if (!dbPost) {
-      throw new CustomError.NotFoundError(`No post with id : ${postId}`);
-    }
-
-    const { title, authors, abstract, doi, date, likes, downloads, _id } = dbPost;
-
-    const singleSharedpost = {
-      title,
-      authors,
-      abstract,
-      doi,
-      date,
-      likes,
-      downloads,
-      post: _id,
-    };
-
-    // add post to shared posts
-    sharedpostsItems.push(singleSharedpost);
+  if (!dbPost) {
+    throw new CustomError.NotFoundError(`No post with id : ${postId}`);
   }
 
+  const { title: postTitle, authors, university, abstract, doi, date, _id: postID } = dbPost;
+
   const sharedpost = await Sharedposts.create({
-    sharedpostsItems,
+    title,
     user: req.user.userId,
+    sharedpostdetails: [
+      {
+        title: postTitle,
+        authors,
+        university,
+        abstract,
+        doi,
+        date,
+        post: postID,
+      },
+    ],
   });
 
-  res.status(StatusCodes.CREATED).json({ sharedpost });
+  
+
+  res.status(StatusCodes.CREATED).json(sharedpost);
 };
+
+
 
 const getAllSharedposts = async (req, res) => {
     const sharedposts = await Sharedposts.find({});
