@@ -34,6 +34,15 @@ const PostSchema = new mongoose.Schema({
   downloads: {
     type: Number,
   },
+},
+{ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
+
+PostSchema.virtual('shares', {
+  ref: 'Sharedposts',
+  localField: '_id',
+  foreignField: 'post',
+  justOne: false,
 });
 
 module.exports = mongoose.model("Post", PostSchema);
