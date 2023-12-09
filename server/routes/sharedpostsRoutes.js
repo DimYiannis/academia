@@ -10,6 +10,7 @@ const {
     updateSharedpost,
     createsharedpost,
     getAllSharedposts,
+    deleteSharedpost
   } = require('../controllers/sharedpostsController');
 
   router
@@ -23,5 +24,6 @@ const {
   .route('/:id')
   .get(authenticateUser, getSharedpost)
   .patch(authenticateUser, updateSharedpost)
+  .delete(authenticateUser, deleteSharedpost )
 
   module.exports = router;

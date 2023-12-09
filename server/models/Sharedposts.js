@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 
 const SingleSharedpostsSchema = mongoose.Schema({
  
-  post: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Post",
-    required: true,
-  },
   title: {
     type: String,
     required: [true, "Please provide title"],
