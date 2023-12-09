@@ -9,7 +9,7 @@
         </div>
 
         <div class="mt-2 mr-3">
-          <img class="w-[700px] rounded-md" :src="user.image" />
+          <img class="w-[700px] rounded-md" :src="user.background" />
         </div>
         <div class="relative">
           <div class="flex justify-between items-start">
@@ -17,7 +17,7 @@
               <!--prof image-->
               <img
                 class="object-cover rounded-full"
-                src="https://picsum.photos/id/237/200/300"
+                :src="user.profile"
               />
             </div>
             <div>
@@ -61,10 +61,6 @@ export default {
   props: {
     user: {
       type: Object,
-      required: true,
-    },
-    shownotif: {
-      type: Boolean,
       required: true,
     },
   },

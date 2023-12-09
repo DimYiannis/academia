@@ -73,7 +73,7 @@
         <div class="post-actions flex">
           <button @click="likePost()">{{ i.likes }} Likes</button>
           <button>Downloads {{ i.downloads }}</button>
-          <button class="">
+          <button @click="addBookmark(i._id)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="32"
@@ -90,7 +90,7 @@
               />
             </svg>
           </button>
-          <button>
+          <button @click="modal" >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="32"
@@ -116,31 +116,58 @@
       </div>
     </main>
   </div>
+
+  <Teleport to="#modal">
+    <sharepostmodal v-show="showmodal" @close-modal="modal" :user="user"/>
+  </Teleport>
 </template>
 
 <script>
+import axios from "axios";
+import sharepostmodal from "../components/sharepostmodal.vue"
 export default {
+  data() {
+    return {
+      showmodal: false,
+    };
+  },
   props: {
     posts: {
       type: Object,
       required: true,
     },
+    user: {
+      type: Object,
+      required: true,
+    },
+  },
+  components: {
+    sharepostmodal,
   },
   methods: {
-    likePost() {
-      console.log(this.data);
-      // Add logic to handle liking a post
-      // You might want to update the 'liked' state and the number of likes in the database
+    async addBookmark(postId) {
+      try {
+        await axios.post(`http://localhost:5000/api/v1/bookmarks`,
+        {post: postId}, 
+        { withCredentials: true,}
+        );
+      } catch (error) {
+        console.error("Error creating bookmark:", error);
+      }
     },
-    commentPost() {
-      // Add logic to handle commenting on a post
-      // You might navigate to a separate page or show a modal for commenting
+    async sharePost(postId) {
+      try {
+        await axios.post(`http://localhost:5000/api/v1/sharedposts`,
+        {post: postId}, 
+        { withCredentials: true,}
+        )
+      } catch (error) {
+        console.error("Error sharing post:", error);
+      }
     },
-    formatDate(dateString) {
-      // Add logic to format the date (you can use a library like day.js or date-fns)
-      // For simplicity, let's assume dateString is in a valid date format
-      const date = new Date(dateString);
-      return date.toDateString();
+    modal() {
+      this.showmodal = !this.showmodal;
+      console.log(this.showmodal);
     },
   },
 };
