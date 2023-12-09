@@ -56,7 +56,7 @@ const createbookmark = async (req, res) => {
 const getAllBookmarks = async (req, res) => {
   try {
     // Fetch all bookmarks
-    const bookmarks = await Bookmarks.find({});
+    const bookmarks = await Bookmarks.find({ user: req.user.userId });
 
     // Iterate through bookmarks and include post details for each
     const bookmarksWithDetails = bookmarks.map(async (bookmark) => {
@@ -69,14 +69,16 @@ const getAllBookmarks = async (req, res) => {
         post: bookmark.post,
         createdAt: bookmark.createdAt,
         updatedAt: bookmark.updatedAt,
-        postDetails: {
+        postDetails:postDetails
+        ? {
           title: postDetails.title,
           authors: postDetails.authors,
           university: postDetails.university,
           abstract: postDetails.abstract,
           doi: postDetails.doi,
           date: postDetails.date,
-        },
+        }
+        : null
       };
     });
 

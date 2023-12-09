@@ -48,4 +48,11 @@ const SharedpostSchema = mongoose.Schema(
 );
 SharedpostSchema.index({ post: 1, user: 1 }, { unique: true });
 
+// fetch user information
+SharedpostSchema.pre("find", function (next) {
+  this.populate("user", "name"); 
+  next();
+});
+
+
 module.exports = mongoose.model("SharedPosts", SharedpostSchema);
