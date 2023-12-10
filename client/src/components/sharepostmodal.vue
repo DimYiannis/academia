@@ -28,6 +28,7 @@
         <div class="flex mt-5">
           <img class="rounded-full w-10 h-10 mt-2" :src="user.profile" />
           <input
+            v-model="postContent"
             type="text"
             id="large-input"
             class="block w-full p-4 mb-5 outline-none caret-[#388aef]"
@@ -35,7 +36,7 @@
           />
         </div>
         <div class="border-t-2 flex justify-end">
-          <button class="font-semibold mt-4">Post</button>
+          <button @click="sharePost" class="font-semibold mt-4">Post</button>
         </div>
       </div>
     </div>
@@ -44,14 +45,35 @@
 
 <script>
 export default {
-    props: {
+  data() {
+    return {
+      postContent: '',
+    };
+  },
+  props: {
     user: {
       type: Object,
       required: true,
-    },},
+    },
+    postId: {
+      type: String,
+      required: true,
+    },
+  },
   methods: {
     closemodal() {
       this.$emit("close-modal");
+    },
+    sharePost() {
+      const sharedPost = {
+        postId: this.postId,
+        content: this.postContent,
+      };
+
+      
+      this.$emit("share-post", sharedPost);
+     
+      this.postContent = '';
     },
   },
 };

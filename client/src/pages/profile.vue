@@ -63,6 +63,10 @@ export default {
       type: Object,
       required: true,
     },
+    shownotif: {
+      type: Boolean,
+      required: true,
+    },
   },
   methods: {},
 };

@@ -90,7 +90,7 @@
               />
             </svg>
           </button>
-          <button @click="modal" >
+          <button @click="modal(i._id)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="32"
@@ -118,17 +118,25 @@
   </div>
 
   <Teleport to="#modal">
-    <sharepostmodal v-show="showmodal" @close-modal="modal" :user="user"/>
+    <sharepostmodal
+      v-show="showmodal"
+      @close-modal="modal"
+      :user="user"
+      :postId="postId"
+      @share-post="sharePost"
+    />
   </Teleport>
 </template>
 
 <script>
 import axios from "axios";
-import sharepostmodal from "../components/sharepostmodal.vue"
+import sharepostmodal from "../components/sharepostmodal.vue";
 export default {
   data() {
     return {
       showmodal: false,
+      postId: "",
+      input: "",
     };
   },
   props: {
@@ -147,25 +155,32 @@ export default {
   methods: {
     async addBookmark(postId) {
       try {
-        await axios.post(`http://localhost:5000/api/v1/bookmarks`,
-        {post: postId}, 
-        { withCredentials: true,}
+        await axios.post(
+          `http://localhost:5000/api/v1/bookmarks`,
+          { post: postId },
+          { withCredentials: true }
         );
       } catch (error) {
         console.error("Error creating bookmark:", error);
       }
     },
-    async sharePost(postId) {
+    async sharePost(sharedPost) {
       try {
-        await axios.post(`http://localhost:5000/api/v1/sharedposts`,
-        {post: postId}, 
-        { withCredentials: true,}
-        )
+        console.log("Shared Post:", sharedPost);
+        const { postId, content } = sharedPost;
+        console.log(postId);
+        console.log(content);
+        await axios.post(
+          `http://localhost:5000/api/v1/sharedposts`,
+          { post: postId, title: content },
+          { withCredentials: true }
+        );
       } catch (error) {
         console.error("Error sharing post:", error);
       }
     },
-    modal() {
+    modal(post_Id) {
+      this.postId = post_Id;
       this.showmodal = !this.showmodal;
       console.log(this.showmodal);
     },
