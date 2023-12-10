@@ -7,7 +7,7 @@
 
       <div class="grid gap-2 justify-items-start mt-6">
         <h1 class="text-3xl font-semibold">Welcome to your inbox!</h1>
-        <h2 class="text-sm">
+        <h2 class="text-sm mr-2">
           Drop a line, share posts and more with private conversations between
           you and others on Academia.
         </h2>

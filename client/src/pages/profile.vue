@@ -20,8 +20,7 @@
             <div>
               <!--edit prof-->
               <nav
-                class="flex mt-6 mr-3 text-lg font-semobold absolute 
-                right-0"
+                class="flex mt-6 mr-3 text-lg font-semobold absolute right-0"
               >
                 <button class="">Edit Profile</button>
               </nav>
@@ -72,7 +71,7 @@
                   <!-- You can add other multimedia content (images, videos) here -->
                 </div>
               </div>
-              
+              <button @click="deletepost(i._id)">Delete Post</button>
             </div>
           </main>
         </div>
@@ -81,16 +80,15 @@
 
     <!--right bar-->
     <section class="mt-5 ml-10 w-2/5">
-
       <!--Notif-->
       <div class="">
         <div
           class="border-b-2 flex w-fit"
           :class="{ 'justify-end w-full': shownotif }"
         >
-          <h1 @click="notif" 
-          class="text-base font-semibold cursor-pointer">
-            Notifications</h1>
+          <h1 @click="notif" class="text-base font-semibold cursor-pointer">
+            Notifications
+          </h1>
         </div>
 
         <!--content-->
@@ -106,14 +104,15 @@
         </div>
       </div>
 
-        <!--Likes-->
-        <div class="mt-72">
+      <!--Likes-->
+      <div class="mt-72">
         <div
           class="border-b-2 flex w-fit"
           :class="{ 'justify-end w-full': showlikes }"
         >
           <h1 @click="likes" class="text-base font-semibold cursor-pointer">
-            Favorites</h1>
+            Favorites
+          </h1>
         </div>
 
         <!--content-->
@@ -128,7 +127,6 @@
           </div>
         </div>
       </div>
-
     </section>
   </main>
 </template>
@@ -160,7 +158,7 @@ export default {
     async getsharedposts() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/sharedposts",
+          "http://localhost:5000/api/v1/sharedposts/mysharedposts",
           {
             withCredentials: true,
           }
@@ -174,12 +172,26 @@ export default {
         console.log("Response headers:", error.response.headers);
       }
     },
+    async deletepost(postId) {
+      try {
+        await axios.delete(
+          `http://localhost:5000/api/v1/sharedposts/${postId}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        this.getsharedposts();
+      } catch (error) {
+        console.error("Error deleting shared post:", error);
+      }
+    },
     likes() {
-      this.showlikes = !this.showlikes
+      this.showlikes = !this.showlikes;
     },
     notif() {
-      this.$emit('show-notif')
-    }
+      this.$emit("show-notif");
+    },
   },
 };
 </script>
