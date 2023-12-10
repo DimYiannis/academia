@@ -32,7 +32,7 @@
             <!-- You can add other multimedia content (images, videos) here -->
           </div>
         </div>
-        <div class="post-actions flex mt-2">
+        <div class=" flex mt-2">
           <button @click="likePost()">
             {{ i.likes }} Likes
           </button>
@@ -74,21 +74,6 @@ export default {
         console.error("Error response data:", error.response.data);
         console.log("Response headers:", error.response.headers);
       }
-    },
-    likePost() {
-      console.log(this.data);
-      // Add logic to handle liking a post
-      // You might want to update the 'liked' state and the number of likes in the database
-    },
-    commentPost() {
-      // Add logic to handle commenting on a post
-      // You might navigate to a separate page or show a modal for commenting
-    },
-    formatDate(dateString) {
-      // Add logic to format the date (you can use a library like day.js or date-fns)
-      // For simplicity, let's assume dateString is in a valid date format
-      const date = new Date(dateString);
-      return date.toDateString();
     },
   },
 };
