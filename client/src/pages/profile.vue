@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div class="mt-20 border-b-2 pb-3">
+        <div class="mt-20  pb-3">
           <h1 class="text-3xl capitalize">{{ user.name }}</h1>
           <h2 class="text-lg mt-3">{{ user.info }}</h2>
         </div>
@@ -42,8 +42,7 @@
           </div>
 
           <main
-            class="h-screen mt-5 overflow-hidden overflow-y-auto overscroll-auto"
-          >
+            class="h-screen mt-5 mr-2 overflow-hidden overflow-y-auto overscroll-auto">
             <div class="border p-4 mb-4 rounded-3xl" v-for="i of sharedposts">
               <h1>Post made by: {{ i.user.name }}</h1>
               <p>{{ i.title }}</p>

@@ -119,7 +119,7 @@
     <main class="w-full">
       <div class="h-screen  overflow-auto">
         <router-view 
-        :posts="posts" 
+        :posts="posts" @update-posts="getsinglepost"
         :user="user" @show-notif="notif"
         :shownotif="shownotif"></router-view>
       </div>
@@ -195,6 +195,10 @@ export default {
       this.shownotif = !this.shownotif;
       console.log(this.shownotif);
     },
+    getsinglepost(searchedpost) {
+      this.posts = searchedpost;
+      console.log(searchedpost);
+    }
   },
 };
 </script>

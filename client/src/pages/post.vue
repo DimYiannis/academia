@@ -25,9 +25,11 @@
           class="w-full focus:outline-none"
           type="text"
           v-model="input"
-          placeholder="Search..."
+          placeholder="Enter doi..."
         />
         <svg
+          class="cursor-pointer"
+          @click="getsinglepost(input)"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
@@ -60,10 +62,6 @@
           <h2>Author: {{ i.authors }}</h2>
           <h2>Institutions: {{ i.university }}</h2>
           <h3>Year: {{ i.date }}</h3>
-          <div class="author-info">
-            <span class="author-name font-bold">{{}}</span>
-            <span class="post-time text-gray-700">{{}}</span>
-          </div>
         </div>
         <div class="post-content mb-2">
           <p class="line-clamp-3">Abstract: {{ i.abstract }}</p>
@@ -166,10 +164,10 @@ export default {
     },
     async sharePost(sharedPost) {
       try {
-        console.log("Shared Post:", sharedPost);
+        //console.log("Shared Post:", sharedPost);
         const { postId, content } = sharedPost;
-        console.log(postId);
-        console.log(content);
+        // console.log(postId);
+        //console.log(content);
         await axios.post(
           `http://localhost:5000/api/v1/sharedposts`,
           { post: postId, title: content },
@@ -177,6 +175,25 @@ export default {
         );
       } catch (error) {
         console.error("Error sharing post:", error);
+      }
+    },
+    async getsinglepost(input) {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/posts/${input}`,
+          { withCredentials: true }
+        );
+        console.log(response.data.post);
+        const searchedpost = response.data.post
+        // notify the parent component to update the posts data
+        this.$emit("update-posts", [searchedpost]); 
+        //enclosed the searched post inside an array. 
+        //This is because the parent component expects an array of posts (v-for="i of posts").
+        //With this change, when i search for a specific post, 
+        //it will replace the list of posts with an array containing only the searched post, preventing the iteration over its properties.
+
+      } catch (error) {
+        console.error("Error fetching single post:", error);
       }
     },
     modal(post_Id) {
