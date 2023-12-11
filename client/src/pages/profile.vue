@@ -95,17 +95,25 @@
         <div>
           <div
             :class="{
-              'transition-opacity ease-out duration-500 opacity-0': !shownotif,
+              ' border-[#388aef] transition-opacity ease-out duration-500 opacity-0':
+                !shownotif,
               'transition-opacity ease-in duration-500 opacity-100': shownotif,
             }"
           >
-            <div>djhcbejhwkcnqjnrjuvnq</div>
+            <div class="grid mt-5">
+              <div class="grid justify-items-center">
+                <h1 class="font-semibold text-lg bg-[#388aef] text-white
+                rounded-md p-2">
+                  Not any notifications yet!</h1>
+                <img src="../assets/notif.jpg" class="w-[500px] h-[fit" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!--Likes-->
-      <div class="mt-72">
+      <div class="mt-34">
         <div
           class="border-b-2 flex w-fit"
           :class="{ 'justify-end w-full': showlikes }"
@@ -126,9 +134,12 @@
             <main
               class="h-screen mt-5 mr-2 overflow-hidden overflow-y-auto overscroll-auto"
             >
-              <div class="border p-4 mb-4 rounded-3xl grid" v-for="i of likedposts">
+              <div
+                class="border p-4 mb-4 rounded-3xl grid"
+                v-for="i of likedposts"
+              >
                 <svg
-                @click="unlike(i._id)"
+                  @click="unlike(i._id)"
                   class="cursor-pointer justify-self-end"
                   xmlns="http://www.w3.org/2000/svg"
                   width="26"
@@ -145,7 +156,7 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-                <!--the inner v-for loop is based on i.sharedpostdetails-->
+
                 <div
                   v-for="j in [i.postDetails]"
                   class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl"
@@ -165,7 +176,6 @@
                   <div class="post-content mb-2">
                     <p class="line-clamp-3">Abstract: {{ j.abstract }}</p>
                     <h3>doi: {{ j.doi }}</h3>
-                    <!-- You can add other multimedia content (images, videos) here -->
                   </div>
                 </div>
               </div>
@@ -250,12 +260,9 @@ export default {
     },
     async unlike(postId) {
       try {
-        await axios.delete(
-          `http://localhost:5000/api/v1/likes/${postId}`,
-          {
-            withCredentials: true,
-          }
-        );
+        await axios.delete(`http://localhost:5000/api/v1/likes/${postId}`, {
+          withCredentials: true,
+        });
 
         this.getlikedposts();
       } catch (error) {

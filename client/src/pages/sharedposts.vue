@@ -29,15 +29,9 @@
               Abstract: {{ j.abstract }}
             </p>
             <h3>doi: {{ j.doi }}</h3>
-            <!-- You can add other multimedia content (images, videos) here -->
           </div>
         </div>
-        <div class=" flex mt-2">
-          <button @click="likePost()">
-            {{ i.likes }} Likes
-          </button>
-          <button>Downloads {{ i.downloads }}</button>
-        </div>
+    
       </div>
     </main>
   </div>

@@ -8,17 +8,18 @@
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
 }
 
 *::-webkit-scrollbar-track {
   background: var(--primary);
+  border-radius: 7px;
   
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--secondary);
-  border-radius: 14px;
+  border-radius: 7px;
   border: 3px solid var(--primary);
 }
 
@@ -53,4 +54,7 @@ button:hover {
 
 
 @tailwind utilities;
+
+
+
 

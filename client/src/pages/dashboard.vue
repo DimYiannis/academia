@@ -117,7 +117,7 @@
     </aside>
     <!--Main content-->
     <main class="w-full">
-      <div class="h-screen  overflow-auto">
+      <div class="h-screen  overflow-auto no-scrollbar">
         <router-view 
         :posts="posts" @update-posts="getsinglepost"
         :user="user" @show-notif="notif"

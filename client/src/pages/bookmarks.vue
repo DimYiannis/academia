@@ -19,27 +19,29 @@
           <p class="line-clamp-3">Abstract: {{ j.postDetails?.abstract }}</p>
           <h3>doi: {{ j.postDetails?.doi }}</h3>
 
-          <div class="post-actions flex">
-            <button>{{ j.postDetails?.likes }} Likes</button>
-            <button>Downloads {{ j.postDetails?.downloads }}</button>
-            <button @click="deletebookmark(j._id)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="26"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25L4.5 21V8.742m.164-4.078a2.15 2.15 0 0 1 1.743-1.342a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5"
-                />
-              </svg>
-            </button>
+          <div class="flex justify-between mt-4">
+            
+            <div>
+              <button @click="deletebookmark(j._id)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="26"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="m3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25L4.5 21V8.742m.164-4.078a2.15 2.15 0 0 1 1.743-1.342a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
+          
         </div>
       </div>
     </main>
@@ -76,7 +78,6 @@ export default {
     },
     async deletebookmark(bookmarkId) {
       try {
-
         console.log(this.bookmarks);
         await axios.delete(
           `http://localhost:5000/api/v1/bookmarks/${bookmarkId}`,

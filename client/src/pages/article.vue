@@ -1,9 +1,9 @@
 <template>
-  <div class="grid mx-5 mt-12  ">
+  <div class="grid mx-5 mt-12 border-r-2">
     <div class="grid">
       <div class="flex justify-between">
         <h4>Published on: {{ this.post.date }} <br /></h4>
-        <h4>
+        <h4 class="mr-3">
           doi: {{ post.doi }} <br />
           citations: {{ post.citations }}
         </h4>
@@ -15,12 +15,27 @@
       </div>
     </div>
     <div class="grid mt-5 mx-10">
-      <h1>Abstract</h1>
-      <p>{{ post.abstract }}</p>
+      <h1 class="text-lg font-semibold">Abstract</h1>
+      <p :class="{ 'line-clamp-[10]': !abstract }">{{ post.abstract }}</p>
+      <p @click="showall" class="text-[#388aef] cursor-pointer underline">
+        {{ abstract ? "Hide abstract" : "Continue reading" }}
+      </p>
     </div>
-    <div class="mt-5 mx-10">
-      <h1>Full Access:</h1>
-      <p>{{ post.paper }}</p>
+
+    <!--full article-->
+    <div class="mt-5 mx-10 grid">
+      <div class="border-b-2 text-lg font-semibold cursor-pointer" 
+      :class="{ 'justify-self-end border-[#388aef] w-fit': !showarticle }" 
+      @click="article">
+        Full Access:
+    </div>
+      <p
+        class="mt-4"
+        :class="{
+          'hide transition-opacity ease-out duration-500 opacity-0': !showarticle,
+          'transition-opacity ease-in duration-500 opacity-100': showarticle,}">
+        {{ post.paper }}
+      </p>
     </div>
   </div>
 </template>
@@ -32,6 +47,8 @@ export default {
   data() {
     return {
       post: [],
+      abstract: false,
+      showarticle: false,
     };
   },
   props: {
@@ -57,6 +74,12 @@ export default {
       } catch (error) {
         console.error("Error fetching post information:", error);
       }
+    },
+    showall() {
+      this.abstract = !this.abstract;
+    },
+    article() {
+      this.showarticle = !this.showarticle;
     },
   },
 };
