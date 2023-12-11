@@ -68,48 +68,98 @@
           <h3>doi: {{ i.doi }}</h3>
           <!-- You can add other multimedia content (images, videos) here -->
         </div>
-        <div class="post-actions flex">
-          <button @click="likePost()">{{ i.likes }} Likes</button>
-          <button>Downloads {{ i.downloads }}</button>
-          <button @click="addBookmark(i._id)">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="26"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25L4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
-              />
-            </svg>
-          </button>
-          <button @click="modal(i._id)">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="26"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M7.217 10.907a2.25 2.25 0 1 0 0 
-                2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 
-                1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 
-                0a2.25 2.25 0 1 0 3.935 2.186a2.25 2.25 0 0 
-                0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 
-                3.933-2.185a2.25 2.25 0 0 0-3.933 2.185Z"
-              />
-            </svg>
-          </button>
+        <div class="flex justify-between mt-3">
+          <div class="flex gap-4 items-center" >
+            <div class="flex gap-1 items-end cursor-pointer" 
+            @click="addLike(i._id)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.687-4.5c-1.936 
+            0-3.598 1.126-4.313 2.733c-.715-1.607-2.377-2.733-4.312-2.733C5.098 
+            3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                />
+              </svg>
+              <h4 class="">{{ i.likes }} </h4>
+            </div>
+
+            <div class="flex gap-1 items-end cursor-pointer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                viewBox="0 0 20 20"
+              >
+                <g fill="currentColor">
+                  <path
+                    d="M10.75 2.75a.75.75 0 0 0-1.5 
+                    0v8.614L6.295 8.235a.75.75 0 1 0-1.09 
+                    1.03l4.25 4.5a.75.75 0 0 0 1.09 0l4.25-4.5a.75.75 
+                    0 0 0-1.09-1.03l-2.955 3.129V2.75Z"
+                  />
+                  <path
+                    d="M3.5 12.75a.75.75 0 0 0-1.5 
+                    0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 
+                    2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 
+                    0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 
+                    0-1.25-.56-1.25-1.25v-2.5Z"
+                  />
+                </g>
+              </svg>
+              <h4> {{ i.downloads }}</h4>
+            </div>
+          </div>
+          <div>
+            <button @click="addBookmark(i._id)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="26"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25L4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+                />
+              </svg>
+            </button>
+            <button @click="modal(i._id)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                viewBox="0 0 20 20"
+              >
+                <g fill="currentColor">
+                  <path
+                    d="M9.25 13.25a.75.75 0 0 0 1.5 0V4.636l2.955 
+                    3.129a.75.75 0 0 0 1.09-1.03l-4.25-4.5a.75.75 0 0 
+                    0-1.09 0l-4.25 4.5a.75.75 0 1 0 1.09 1.03L9.25 
+                    4.636v8.614Z"
+                  />
+                  <path
+                    d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 
+                    0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 
+                    0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 
+                    0-1.25-.56-1.25-1.25v-2.5Z"
+                  />
+                </g>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </main>
@@ -162,6 +212,17 @@ export default {
         console.error("Error creating bookmark:", error);
       }
     },
+    async addLike(postId) {
+      try {
+        await axios.post(
+          `http://localhost:5000/api/v1/likes`,
+          { post: postId },
+          { withCredentials: true }
+        );
+      } catch (error) {
+        console.error("Error creating like:", error);
+      }
+    },
     async sharePost(sharedPost) {
       try {
         //console.log("Shared Post:", sharedPost);
@@ -184,14 +245,13 @@ export default {
           { withCredentials: true }
         );
         console.log(response.data.post);
-        const searchedpost = response.data.post
+        const searchedpost = response.data.post;
         // notify the parent component to update the posts data
-        this.$emit("update-posts", [searchedpost]); 
-        //enclosed the searched post inside an array. 
+        this.$emit("update-posts", [searchedpost]);
+        //enclosed the searched post inside an array.
         //This is because the parent component expects an array of posts (v-for="i of posts").
-        //With this change, when i search for a specific post, 
+        //With this change, when i search for a specific post,
         //it will replace the list of posts with an array containing only the searched post, preventing the iteration over its properties.
-
       } catch (error) {
         console.error("Error fetching single post:", error);
       }

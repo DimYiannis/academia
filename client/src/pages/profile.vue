@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div class="mt-20  pb-3">
+        <div class="mt-20 pb-3">
           <h1 class="text-3xl capitalize">{{ user.name }}</h1>
           <h2 class="text-lg mt-3">{{ user.info }}</h2>
         </div>
@@ -42,7 +42,8 @@
           </div>
 
           <main
-            class="h-screen mt-5 mr-2 overflow-hidden overflow-y-auto overscroll-auto">
+            class="h-screen mt-5 mr-2 overflow-hidden overflow-y-auto overscroll-auto"
+          >
             <div class="border p-4 mb-4 rounded-3xl" v-for="i of sharedposts">
               <h1>Post made by: {{ i.user.name }}</h1>
               <p>{{ i.title }}</p>
@@ -122,7 +123,53 @@
               'transition-opacity ease-in duration-500 opacity-100': showlikes,
             }"
           >
-            <div>djhcbejhwkcnqjnrjuvnq</div>
+            <main
+              class="h-screen mt-5 mr-2 overflow-hidden overflow-y-auto overscroll-auto"
+            >
+              <div class="border p-4 mb-4 rounded-3xl grid" v-for="i of likedposts">
+                <svg
+                @click="unlike(i._id)"
+                  class="cursor-pointer justify-self-end"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="26"
+                  height="26"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 
+                    0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 
+                    13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12L5.47 
+                    6.53a.75.75 0 0 1 0-1.06Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <!--the inner v-for loop is based on i.sharedpostdetails-->
+                <div
+                  v-for="j in [i.postDetails]"
+                  class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl"
+                >
+                  <div class="grid items-center">
+                    <h1 class="text-lg font-semibold">
+                      <router-link
+                        class="underline decoration-[#388aef] capitalize"
+                        :to="'/article/' + j.doi"
+                        >{{ j.title }}</router-link
+                      >
+                    </h1>
+                    <h2>Author: {{ j.authors }}</h2>
+                    <h2>Institutions: {{ j.university }}</h2>
+                    <h3>Year: {{ j.date }}</h3>
+                  </div>
+                  <div class="post-content mb-2">
+                    <p class="line-clamp-3">Abstract: {{ j.abstract }}</p>
+                    <h3>doi: {{ j.doi }}</h3>
+                    <!-- You can add other multimedia content (images, videos) here -->
+                  </div>
+                </div>
+              </div>
+            </main>
           </div>
         </div>
       </div>
@@ -137,6 +184,7 @@ export default {
     return {
       sharedposts: [],
       showlikes: false,
+      likedposts: [],
     };
   },
   props: {
@@ -152,6 +200,7 @@ export default {
   mounted() {
     // Invoke when the component is mounted
     this.getsharedposts();
+    this.getlikedposts();
   },
   methods: {
     async getsharedposts() {
@@ -183,6 +232,34 @@ export default {
         this.getsharedposts();
       } catch (error) {
         console.error("Error deleting shared post:", error);
+      }
+    },
+    async getlikedposts() {
+      try {
+        const response = await axios.get("http://localhost:5000/api/v1/likes", {
+          withCredentials: true,
+        });
+
+        this.likedposts = response.data.likes;
+        console.log(this.likedposts);
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+        console.error("Error response data:", error.response.data);
+        console.log("Response headers:", error.response.headers);
+      }
+    },
+    async unlike(postId) {
+      try {
+        await axios.delete(
+          `http://localhost:5000/api/v1/likes/${postId}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        this.getlikedposts();
+      } catch (error) {
+        console.error("Error deleting liked post from your likes:", error);
       }
     },
     likes() {
