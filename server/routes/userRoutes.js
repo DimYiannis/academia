@@ -10,6 +10,7 @@ const {
   showCurrentUser,
   updateUser,
   updateUserPassword,
+  getUserPosts
 } = require('../controllers/userController');
 
 router
@@ -20,6 +21,7 @@ router.route('/showUser').get(authenticateUser, showCurrentUser);
 router.route('/updateUser').patch(authenticateUser, updateUser);
 router.route('/updateUserPassword').patch(authenticateUser, updateUserPassword);
 
-router.route('/:id').get(authenticateUser, getSingleUser);
+router.route('/:id').get(authenticateUser, getSingleUser,);
+router.route('/:id/posts').get(authenticateUser, getUserPosts,);
 
 module.exports = router;

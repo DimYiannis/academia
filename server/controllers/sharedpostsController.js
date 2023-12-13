@@ -62,11 +62,13 @@ const getSharedpost = async (req, res) => {
   res.status(StatusCodes.OK).json({ sharedpost });
 };
 
-// user's shared posts
+// current user's shared posts
 const getCurrentUserPosts = async (req, res) => {
   const sharedposts = await Sharedposts.find({ user: req.user.userId });
   res.status(StatusCodes.OK).json({ sharedposts, count: sharedposts.length });
 };
+
+
 
 // update shared post
 const updateSharedpost = async (req, res) => {
@@ -135,5 +137,6 @@ module.exports = {
   updateSharedpost,
   createsharedpost,
   getAllSharedposts,
-  deleteSharedpost
+  deleteSharedpost,
+  
 };

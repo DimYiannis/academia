@@ -16,14 +16,14 @@ const createlike = async (req, res) => {
       throw new CustomError.NotFoundError(`No post with id : ${postId}`);
     }
 
-    // Create a new bookmark with references to the user and the post
+    // new like with references to the user and the post
     const newLike = new Like({
-      user: req.user.userId, // Assuming you have the user ID in req.user
+      user: req.user.userId, 
       post: dbPost._id,
     });
     await newLike.save();
 
-    // Include post details in the response
+    // post details in the response
     const response = {
       message: "Like created successfully",
       bookmark: {
@@ -52,15 +52,15 @@ const createlike = async (req, res) => {
   }
 };
 
-// All bookmarks
+// All likes
 const getAllLikes = async (req, res) => {
   try {
-    // Fetch all bookmarks
+    // Fetch all likes
     const likes = await Like.find({ user: req.user.userId });
 
-    // Iterate through bookmarks and include post details for each
+    // Iterate through likes and include post details for each
     const likesWithDetails = likes.map(async (like) => {
-      // Fetch post details for each bookmark
+      // Fetch post details for each like
       const postDetails = await Post.findOne({ _id: like.post });
 
       return {
@@ -120,8 +120,50 @@ const deleteLike = async (req, res) => {
   }
 };
 
+const getUsersLikes = async (req,res) => {
+  const {id: userId} = req.params;
+  try {
+    const likes = await Like.find({user:userId});
+
+    const likesWithDetails = likes.map(async (like) => {
+      // Fetch post details for each like
+      const postDetails = await Post.findOne({ _id: like.post });
+
+      return {
+        _id: like._id,
+        user: like.user,
+        post: like.post,
+        createdAt: like.createdAt,
+        updatedAt: like.updatedAt,
+        postDetails:postDetails
+        ? {
+          title: postDetails.title,
+          authors: postDetails.authors,
+          university: postDetails.university,
+          abstract: postDetails.abstract,
+          doi: postDetails.doi,
+          date: postDetails.date,
+        }
+        : null
+      };
+    });
+
+    const resolvedLike = await Promise.all(likesWithDetails);
+
+    if (!likes || likes.length === 0) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        message: `No shared posts found for user with ID: ${userId}`,
+      })
+    }
+    res.status(StatusCodes.OK).json({ likes: resolvedLike});
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error.message})
+  }
+}
+
 module.exports = {
   createlike,
   getAllLikes,
   deleteLike,
+  getUsersLikes
 };

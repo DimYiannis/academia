@@ -6,6 +6,7 @@ const {
   createlike,
   getAllLikes,
   deleteLike,
+  getUsersLikes
 } = require("../controllers/likesController");
 
 router
@@ -16,5 +17,7 @@ router
 router
 .route('/:id')
 .delete(authenticateUser,  deleteLike)
+
+router.route('/:id/likes').get(getUsersLikes)
 
 module.exports = router;
