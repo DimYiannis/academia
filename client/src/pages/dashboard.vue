@@ -119,7 +119,7 @@
     <main class="w-full">
       <div class="h-screen overflow-auto no-scrollbar">
         <router-view
-          :posts="posts"
+          :posts="posts" :loading="loading"
           @update-posts="getsinglepost"
           :user="user"
           @show-notif="notif"
@@ -141,6 +141,7 @@ export default {
       userId: "",
       user: "",
       postId: "",
+      loading:false,
       posts: [
         {
           liked: false,
@@ -191,6 +192,7 @@ export default {
       }
     },
     async getposts() {
+      this.loading = true;
       try {
         const response = await axios.get("http://localhost:5000/api/v1/posts", {
           withCredentials: true,
@@ -199,6 +201,9 @@ export default {
         this.posts = response.data.posts;
       } catch (error) {
         console.error(error.response.data);
+      }
+      finally {
+        this.loading = false
       }
     },
     notif() {
