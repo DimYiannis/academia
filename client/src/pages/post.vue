@@ -69,10 +69,13 @@
           <!-- You can add other multimedia content (images, videos) here -->
         </div>
         <div class="flex justify-between mt-3">
-          <div class="flex gap-4 items-center" >
-            <div class="flex gap-1 items-end cursor-pointer" 
-            @click="addLike(i._id)">
+          <div class="flex items-center">
+            <button
+              class="flex items-end cursor-pointer"
+              @click="addLike(i._id)"
+            >
               <svg
+                :class="{ 'text-red-500': i.liked }"
                 xmlns="http://www.w3.org/2000/svg"
                 width="26"
                 height="26"
@@ -85,14 +88,13 @@
                   stroke-linejoin="round"
                   stroke-width="1.5"
                   d="M21 8.25c0-2.485-2.099-4.5-4.687-4.5c-1.936 
-            0-3.598 1.126-4.313 2.733c-.715-1.607-2.377-2.733-4.312-2.733C5.098 
-            3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                  0-3.598 1.126-4.313 2.733c-.715-1.607-2.377-2.733-4.312-2.733C5.098 
+                  3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                 />
               </svg>
-              <h4 class="">{{ i.likes }} </h4>
-            </div>
+            </button>
 
-            <div class="flex gap-1 items-end cursor-pointer">
+            <button class="flex items-end cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="26"
@@ -115,12 +117,12 @@
                   />
                 </g>
               </svg>
-              <h4> {{ i.downloads }}</h4>
-            </div>
+            </button>
           </div>
           <div>
             <button @click="addBookmark(i._id)">
               <svg
+                :class="{ 'text-gray-500': i.bookmarked }"
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="26"
@@ -208,6 +210,10 @@ export default {
           { post: postId },
           { withCredentials: true }
         );
+
+        const postIndex = this.posts.findIndex((post) => post._id === postId);
+        this.posts[postIndex].bookmarked = !this.posts[postIndex].bookmarked;
+
       } catch (error) {
         console.error("Error creating bookmark:", error);
       }
@@ -219,6 +225,10 @@ export default {
           { post: postId },
           { withCredentials: true }
         );
+
+        // Update the liked state
+        const postIndex = this.posts.findIndex((post) => post._id === postId);
+        this.posts[postIndex].liked = !this.posts[postIndex].liked
       } catch (error) {
         console.error("Error creating like:", error);
       }

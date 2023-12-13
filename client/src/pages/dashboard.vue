@@ -117,15 +117,17 @@
     </aside>
     <!--Main content-->
     <main class="w-full">
-      <div class="h-screen  overflow-auto no-scrollbar">
-        <router-view 
-        :posts="posts" @update-posts="getsinglepost"
-        :user="user" @show-notif="notif"
-        :shownotif="shownotif"></router-view>
+      <div class="h-screen overflow-auto no-scrollbar">
+        <router-view
+          :posts="posts"
+          @update-posts="getsinglepost"
+          :user="user"
+          @show-notif="notif"
+          :shownotif="shownotif"
+        ></router-view>
       </div>
     </main>
   </div>
-  
 </template>
 
 <script>
@@ -138,7 +140,13 @@ export default {
       role: "",
       userId: "",
       user: "",
-      posts: [],
+      postId: "",
+      posts: [
+        {
+          liked: false,
+          bookmarked: false,
+        },
+      ],
       shownotif: false,
     };
   },
@@ -171,11 +179,9 @@ export default {
     logout() {
       try {
         axios
-          .get("http://localhost:5000/api/v1/auth/logout",
-          {
+          .get("http://localhost:5000/api/v1/auth/logout", {
             withCredentials: true,
-          }
-          )
+          })
           .then((response) => {
             console.log(response);
           });
@@ -202,7 +208,7 @@ export default {
     getsinglepost(searchedpost) {
       this.posts = searchedpost;
       console.log(searchedpost);
-    }
+    },
   },
 };
 </script>

@@ -41,10 +41,15 @@
             <h1
               @click="sharedPosts"
               class="text-base font-semibold cursor-pointer mb-2"
+              :class="{'underline decoration-4 decoration-sky-500 underline-offset-4': showSharedPosts}"
             >
               Shared Posts
             </h1>
-            <h1 @click="likes" class="text-base font-semibold cursor-pointer">
+            <h1 
+            @click="likes" 
+            class="text-base font-semibold cursor-pointer"
+            :class="{'underline decoration-4 decoration-sky-500 underline-offset-4': showlikes}"
+            >
               Favorites
             </h1>
           </div>
