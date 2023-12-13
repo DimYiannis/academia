@@ -8,49 +8,57 @@ const createlike = async (req, res) => {
   const { post: postId } = req.body;
 
   try {
-    // find the post
-    const dbPost = await Post.findOne({ _id: postId });
+    // Check if the user has already liked the post
+    const existingLike = await Like.findOne({ user: req.user.userId, post: postId });
+    console.log("Existing Like:", existingLike);
+    if (existingLike) {
+      // User has already liked the post, so unlike it
+      await existingLike.remove();
 
-    // check if post exists
-    if (!dbPost) {
-      throw new CustomError.NotFoundError(`No post with id : ${postId}`);
-    }
+      res.status(StatusCodes.OK).json({
+        message: "Like removed successfully!",
+      });
+    } else {
+      // User has not liked the post, so create a new like
+      const dbPost = await Post.findOne({ _id: postId });
 
-    // new like with references to the user and the post
-    const newLike = new Like({
-      user: req.user.userId, 
-      post: dbPost._id,
-    });
-    await newLike.save();
+      if (!dbPost) {
+        throw new CustomError.NotFoundError(`No post with id : ${postId}`);
+      }
 
-    // post details in the response
-    const response = {
-      message: "Like created successfully",
-      bookmark: {
-        _id: newLike._id,
-        user: newLike.user,
-        post: newLike.post,
-        createdAt: newLike.createdAt,
-        updatedAt: newLike.updatedAt,
-        // Include post details
-        postDetails: {
-          title: dbPost.title,
-          authors: dbPost.authors,
-          university: dbPost.university,
-          abstract: dbPost.abstract,
-          doi: dbPost.doi,
-          date: dbPost.date,
+      const newLike = new Like({
+        user: req.user.userId,
+        post: dbPost._id,
+      });
+      await newLike.save();
+
+      res.status(StatusCodes.CREATED).json({
+        message: "Like created successfully!",
+        bookmark: {
+          _id: newLike._id,
+          user: newLike.user,
+          post: newLike.post,
+          createdAt: newLike.createdAt,
+          updatedAt: newLike.updatedAt,
+          // Include post details
+          postDetails: {
+            title: dbPost.title,
+            authors: dbPost.authors,
+            university: dbPost.university,
+            abstract: dbPost.abstract,
+            doi: dbPost.doi,
+            date: dbPost.date,
+          },
         },
-      },
-    };
-
-    res.status(StatusCodes.CREATED).json(response);
+      });
+    }
   } catch (error) {
-    // Handle validation errors or the post not being found
+    //  validation errors or the post not being found
     console.error(error);
     res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
   }
 };
+
 
 // All likes
 const getAllLikes = async (req, res) => {
@@ -92,7 +100,7 @@ const getAllLikes = async (req, res) => {
   }
 };
 
-// Delete bookmark
+// Delete like
 const deleteLike = async (req, res) => {
   console.log(req.params);
   const { id: likeId } = req.params;

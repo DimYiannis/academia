@@ -8,7 +8,17 @@ const createbookmark = async (req, res) => {
   const { post: postId } = req.body;
 
   try {
-    // find the post
+    const existingbookmark = await Bookmarks.findOne({user: req.user.userId, post: postId});
+    console.log('Existing Bookmark:', existingbookmark);
+    if (existingbookmark) {
+      await existingbookmark.remove();
+
+      res.status(StatusCodes.OK).json({
+        message: " Bookmark removed succesfully!",
+      });
+    } else {
+
+      // find the post
     const dbPost = await Post.findOne({ _id: postId });
 
     // check if post exists
@@ -16,15 +26,15 @@ const createbookmark = async (req, res) => {
       throw new CustomError.NotFoundError(`No post with id : ${postId}`);
     }
 
-    // Create a new bookmark with references to the user and the post
+    // references to the user and the post
     const newBookmark = new Bookmarks({
-      user: req.user.userId, // Assuming you have the user ID in req.user
+      user: req.user.userId, 
       post: dbPost._id,
     });
     await newBookmark.save();
 
     // Include post details in the response
-    const response = {
+    res.status(StatusCodes.CREATED).json({
       message: "Bookmark created successfully",
       bookmark: {
         _id: newBookmark._id,
@@ -42,9 +52,8 @@ const createbookmark = async (req, res) => {
           date: dbPost.date,
         },
       },
-    };
-
-    res.status(StatusCodes.CREATED).json(response);
+    });
+  }
   } catch (error) {
     // Handle validation errors or the post not being found
     console.error(error);
