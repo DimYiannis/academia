@@ -9,7 +9,7 @@ import article from '../pages/article.vue'
 import messages from '../pages/messages.vue'
 import bookmarks from '../pages/bookmarks.vue'
 import sharedposts from '../pages/sharedposts.vue'
-
+import users from '../pages/users.vue'
 
 
 const routes = [ 
@@ -63,6 +63,11 @@ const routes = [
         path: '/sharedposts',
         name: 'sharedposts',
         component: sharedposts,
+      },
+      {
+        path: '/profile/:_id',
+        name: 'users',
+        component: users,
       },
     ],
   },

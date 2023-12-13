@@ -171,7 +171,11 @@ export default {
     logout() {
       try {
         axios
-          .get("http://localhost:5000/api/v1/auth/logout")
+          .get("http://localhost:5000/api/v1/auth/logout",
+          {
+            withCredentials: true,
+          }
+          )
           .then((response) => {
             console.log(response);
           });

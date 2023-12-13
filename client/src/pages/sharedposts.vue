@@ -6,7 +6,9 @@
 
     <main class="h-screen mt-4 overflow-hidden overflow-y-auto overscroll-auto">
       <div class="border p-4 mb-4 rounded-3xl" v-for="i of sharedposts">
-        <h1>Post made by: {{ i.user.name }}</h1>
+        Post made by:
+        <router-link class="underline decoration-sky-500 capitalize"
+        :to="'/profile/' + i.user._id"> {{ i.user.name }}</router-link>
         <p>{{ i.title }}</p>
 
 
