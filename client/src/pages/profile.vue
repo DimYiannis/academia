@@ -214,6 +214,7 @@
 
   <Teleport to="#modal2">
     <edit
+    :userr="userr"
     v-show="showedit"
     @close-modal="edit"/>
   </Teleport>
@@ -230,6 +231,7 @@ export default {
       likedposts: [],
       loading: false,
       showedit:false,
+      userr: this.user
     };
   },
   props: {

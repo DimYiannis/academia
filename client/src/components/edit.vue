@@ -66,7 +66,7 @@
             >
               <!-- had to place a label to enclose input and svg in 
               order for the method to work -->
-              <div class=" absolute top-[40%] left-[35%]">
+              <div class=" absolute top-[40%] left-[35%]" :style="{ backgroundImage: 'url(' + userr.profile + ') center/cover' }">
                 <label for="profile" class="cursor-pointer">
                   <input
                     ref="profInput"
@@ -136,7 +136,7 @@ export default {
     };
   },
   props: {
-    user: {
+    userr: {
       type: Object,
       required: true,
     },
@@ -164,6 +164,7 @@ export default {
     focusInput2() {
       // Focus on the name input when the div with ref nameInput is clicked
       this.$refs.infoInput.focus();
+      console.log(this.userr);
     },
     handleFileChange(event) {
       // Placeholder method for handling file changes
