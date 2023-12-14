@@ -27,12 +27,14 @@ html {
   margin: 10px;
   scroll-behavior: smooth;
   font-family:'Exo 2', sans-serif;
+  max-width: 1600px;
 }
 
 body {
   margin: 0;
   margin-inline: 80px;
   padding: 0;
+  max-width: 1600px;
 }
 
 button {

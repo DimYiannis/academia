@@ -3,7 +3,7 @@
     class="w-full h-full bg-black/30 left-0 top-0 fixed grid justify-items-center z-10"
     @click.self="closemodal"
   >
-    <div class="w-[500px] h-[700px] relative mt-10 rounded-lg bg-white z-20">
+    <div class="w-[500px] h-[550px] relative mt-10 rounded-lg bg-white z-20">
       <div class="h-full m-5">
         <div class="flex h-fit">
           <svg
@@ -26,12 +26,12 @@
           </svg>
         </div>
 
-        <div class="grid h-full">
+        <div class="grid ">
           <!-- photos -->
-          <div class=" h-full">
+          <div class=" ">
             
             <!-- background -->
-            <div class="w-full h-full grid place-items-center border-2">
+            <div class="w-full h-[250px] grid place-items-center border-2">
               <div class="bg-cover" >
                 <div >
                   <label for="background" class="cursor-pointer">
@@ -66,7 +66,7 @@
             >
               <!-- had to place a label to enclose input and svg in 
               order for the method to work -->
-              <div class=" absolute top-[40%] left-[30%]">
+              <div class=" absolute top-[40%] left-[35%]">
                 <label for="profile" class="cursor-pointer">
                   <input
                     ref="profInput"
@@ -95,9 +95,9 @@
             
           </div>
 
-          <div class="grid">
+          <div class="h-fit">
             <!-- name -->
-            <div class="mt-5 border-2" @click="focusInput">
+            <div class="mt-5 border-2 h-[70px]" @click="focusInput">
               <label for="large-input" class="m-3">Name</label>
               <input
                 v-model="userName"
@@ -108,13 +108,13 @@
               />
             </div>
             <!-- info -->
-            <div class="mt-5 border-2" @click="focusInput2">
+            <div class="mt-5 border-2 mb-2" @click="focusInput2">
               <label for="large-input" class="m-3">Info</label>
               <input
                 v-model="userInfo"
                 ref="infoInput"
                 type="text"
-                class="block w-max m-2 outline-none group:click:focus caret-[#388aef]"
+                class="block w-max m-2 outline-none caret-[#388aef]"
                 placeholder=""
               />
             </div>

@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>
-  <main v-else class="flex mt-8 h-fit">
+  <main v-else class="flex mt-8 h-fit w-full">
     <section class="w-3/5 border-r-2 h-full">
       <div class="grid gap-2 w-full">
         <div>

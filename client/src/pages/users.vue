@@ -34,7 +34,7 @@
         </div>
 
         <div
-          class="mt-2 h-[250px] bg-cover bg-center"
+          class="mt-2 h-[250px] bg-cover bg-center mr-1"
           :style="{ backgroundImage: 'url(' + user.background + ')' }"
         ></div>
         <div class="relative">
