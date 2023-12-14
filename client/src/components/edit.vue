@@ -3,9 +3,9 @@
     class="w-full h-full bg-black/30 left-0 top-0 fixed grid justify-items-center z-10"
     @click.self="closemodal"
   >
-    <div class="w-[500px] h-fit relative mt-10 rounded-lg bg-white z-20">
-      <div class="grid gap-4 m-5">
-        <div class="flex">
+    <div class="w-[500px] h-[700px] relative mt-10 rounded-lg bg-white z-20">
+      <div class="h-full m-5">
+        <div class="flex h-fit">
           <svg
             @click="closemodal"
             class="hover:cursor-pointer"
@@ -25,32 +25,103 @@
             />
           </svg>
         </div>
-        <!-- photos -->
-        <div></div>
-        <!-- name -->
-        <div class="mt-5 border-2"  @click="focusInput">
-          <label for="large-input" class="m-3">Name</label>
-          <input
-            v-model="userName"
-            ref="nameInput"
-            type="text"
-            class="block w-max m-2 outline-none caret-[#388aef]"
-            placeholder=""
-          />
-        </div>
-        <!-- info -->
-        <div class="mt-5 border-2 group" @click="focusInput2">
-          <label for="large-input" class="m-3">Info</label>
-          <input
-            v-model="userInfo"
-            ref="infoInput"
-            type="text"
-            class="block w-full m-2 outline-none group:click:focus caret-[#388aef]"
-            placeholder=""
-          />
-        </div>
-        <div class="border-t-2 flex justify-end">
-          <button @click="update" class="font-semibold mt-4">Save</button>
+
+        <div class="grid h-full">
+          <!-- photos -->
+          <div class=" h-full">
+            
+            <!-- background -->
+            <div class="w-full h-full grid place-items-center border-2">
+              <div class="bg-cover" >
+                <div >
+                  <label for="background" class="cursor-pointer">
+                    <input
+                      ref="backInput"
+                      type="file"
+                      id="background"
+                      accept="image/png, image/jpeg"
+                      style="display: none"
+                      @change="handleFileChange2"
+                    />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24px"
+                      viewBox="0 0 24 24"
+                      width="24px"
+                      fill="#000000"
+                    >
+                      <path d="M0 0h24v24H0V0z" fill="none" />
+                      <path
+                        d="M18 20H4V6h9V4H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9h-2v9zm-7.79-3.17l-1.96-2.36L5.5 18h11l-3.54-4.71zM20 4V1h-2v3h-3c.01.01 0 2 0 2h3v2.99c.01.01 2 0 2 0V6h3V4h-3z"
+                      />
+                    </svg>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- profile -->
+            <div class="relative h-0">
+              <div
+              class="absolute -top-24 left-2 rounded-full w-16 h-28 ml-3 border-2"
+            >
+              <!-- had to place a label to enclose input and svg in 
+              order for the method to work -->
+              <div class=" absolute top-[40%] left-[30%]">
+                <label for="profile" class="cursor-pointer">
+                  <input
+                    ref="profInput"
+                    type="file"
+                    id="profile"
+                    accept="image/png, image/jpeg"
+                    style="display: none"
+                    @change="handleFileChange"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    width="24px"
+                    fill="#000000"
+                  >
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                      d="M18 20H4V6h9V4H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9h-2v9zm-7.79-3.17l-1.96-2.36L5.5 18h11l-3.54-4.71zM20 4V1h-2v3h-3c.01.01 0 2 0 2h3v2.99c.01.01 2 0 2 0V6h3V4h-3z"
+                    />
+                  </svg>
+                </label>
+              </div>
+            </div>
+            </div>
+            
+          </div>
+
+          <div class="grid">
+            <!-- name -->
+            <div class="mt-5 border-2" @click="focusInput">
+              <label for="large-input" class="m-3">Name</label>
+              <input
+                v-model="userName"
+                ref="nameInput"
+                type="text"
+                class="block w-max m-2 outline-none caret-[#388aef]"
+                placeholder=""
+              />
+            </div>
+            <!-- info -->
+            <div class="mt-5 border-2" @click="focusInput2">
+              <label for="large-input" class="m-3">Info</label>
+              <input
+                v-model="userInfo"
+                ref="infoInput"
+                type="text"
+                class="block w-max m-2 outline-none group:click:focus caret-[#388aef]"
+                placeholder=""
+              />
+            </div>
+            <div class="border-t-2 flex justify-end">
+              <button @click="update" class="font-semibold mt-4">Save</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -93,6 +164,18 @@ export default {
     focusInput2() {
       // Focus on the name input when the div with ref nameInput is clicked
       this.$refs.infoInput.focus();
+    },
+    handleFileChange(event) {
+      // Placeholder method for handling file changes
+
+      // Add your logic here to handle the selected file
+      this.$refs.profInput.focus();
+    },
+    handleFileChange2(event) {
+      // Placeholder method for handling file changes
+
+      // Add your logic here to handle the selected file
+      this.$refs.backInput.focus();
     },
   },
 };
