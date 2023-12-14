@@ -89,7 +89,9 @@
         <div class="flex justify-between mt-3">
           <div class="flex items-center">
             <button
-              class="flex items-end disabled:cursor-progress"
+              @mouseover="tip=true"
+              @mouseleave="tip=false"
+              class="disabled:cursor-progress"
               @click="addLike(i._id)"
               :disabled="likeLoading"
             >
@@ -111,8 +113,14 @@
                 />
               </svg>
             </button>
+            <div v-show="tip"
+              class="absolute z-10 inline-block px-3 py-2 text-sm font-medium
+               text-white transition-opacity duration-300 bg-gray-900 
+               rounded-lg shadow-sm dark:bg-gray-700 "
+            > like
+            </div>
 
-            <button class="flex items-end cursor-pointer">
+            <button @click="modal(i._id)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="26"
@@ -121,16 +129,15 @@
               >
                 <g fill="currentColor">
                   <path
-                    d="M10.75 2.75a.75.75 0 0 0-1.5 
-                    0v8.614L6.295 8.235a.75.75 0 1 0-1.09 
-                    1.03l4.25 4.5a.75.75 0 0 0 1.09 0l4.25-4.5a.75.75 
-                    0 0 0-1.09-1.03l-2.955 3.129V2.75Z"
+                    d="M9.25 13.25a.75.75 0 0 0 1.5 0V4.636l2.955 
+                    3.129a.75.75 0 0 0 1.09-1.03l-4.25-4.5a.75.75 0 0 
+                    0-1.09 0l-4.25 4.5a.75.75 0 1 0 1.09 1.03L9.25 
+                    4.636v8.614Z"
                   />
                   <path
-                    d="M3.5 12.75a.75.75 0 0 0-1.5 
-                    0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 
-                    2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 
-                    0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 
+                    d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 
+                    0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 
+                    0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 
                     0-1.25-.56-1.25-1.25v-2.5Z"
                   />
                 </g>
@@ -157,29 +164,6 @@
                   stroke-width="1.5"
                   d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25L4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
                 />
-              </svg>
-            </button>
-            <button @click="modal(i._id)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="26"
-                height="26"
-                viewBox="0 0 20 20"
-              >
-                <g fill="currentColor">
-                  <path
-                    d="M9.25 13.25a.75.75 0 0 0 1.5 0V4.636l2.955 
-                    3.129a.75.75 0 0 0 1.09-1.03l-4.25-4.5a.75.75 0 0 
-                    0-1.09 0l-4.25 4.5a.75.75 0 1 0 1.09 1.03L9.25 
-                    4.636v8.614Z"
-                  />
-                  <path
-                    d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 
-                    0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 
-                    0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 
-                    0-1.25-.56-1.25-1.25v-2.5Z"
-                  />
-                </g>
               </svg>
             </button>
           </div>
@@ -212,6 +196,7 @@ export default {
       bookmarkLoading: false,
       message: "",
       showTooltip: false,
+      tip:false,
     };
   },
   props: {
@@ -252,7 +237,6 @@ export default {
         setTimeout(() => {
           this.showTooltip = false;
         }, 5000);
-      
       }
     },
     async addLike(postId) {

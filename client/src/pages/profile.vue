@@ -46,7 +46,7 @@
               <nav
                 class="flex mt-6 mr-3 text-lg font-semobold absolute right-0"
               >
-                <button class="">Edit Profile</button>
+                <button @click="edit" class="">Edit Profile</button>
               </nav>
             </div>
           </div>
@@ -211,10 +211,17 @@
       </div>
     </section>
   </main>
+
+  <Teleport to="#modal2">
+    <edit
+    v-show="showedit"
+    @close-modal="edit"/>
+  </Teleport>
 </template>
 
 <script>
 import axios from "axios";
+import edit from "../components/edit.vue";
 export default {
   data() {
     return {
@@ -222,6 +229,7 @@ export default {
       showlikes: false,
       likedposts: [],
       loading: false,
+      showedit:false,
     };
   },
   props: {
@@ -233,6 +241,9 @@ export default {
       type: Boolean,
       required: true,
     },
+  },
+  components: {
+    edit
   },
   mounted() {
     // Invoke when the component is mounted
@@ -305,6 +316,9 @@ export default {
     notif() {
       this.$emit("show-notif");
     },
+    edit() {
+      this.showedit = !this.showedit
+    }
   },
 };
 </script>

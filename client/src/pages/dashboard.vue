@@ -133,7 +133,7 @@
 
 <script>
 import axios from "axios";
-import notif from "../components/notif.vue";
+
 export default {
   data() {
     return {
@@ -151,9 +151,6 @@ export default {
       ],
       shownotif: false,
     };
-  },
-  components: {
-    notif,
   },
   mounted() {
     // Invoke getuser method when the component is mounted
