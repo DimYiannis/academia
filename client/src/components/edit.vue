@@ -32,7 +32,7 @@
             
             <!-- background -->
             <div class="w-full h-[250px] grid place-items-center border-2"
-            :style="{ backgroundImage: 'url(' + userr.background + ')', backgroundPosition: 'center', backgroundSize: 'cover' }">
+            :style="{ backgroundImage: userr.background ? 'url(' + userr.background + ')' : 'none', backgroundColor: userr.background ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }">
               <div class="bg-cover" >
                 <div class=" bg-black/40 hover:bg-black/70 rounded-full p-1" >
                   <label for="background" class="cursor-pointer">
@@ -64,11 +64,11 @@
             <div class="relative h-0">
               <div
               class="absolute -top-24 left-2 rounded-full w-16 h-28 ml-3 border-2"
-              :style="{ backgroundImage: 'url(' + userr.profile + ')' , backgroundPosition: 'center', backgroundSize: 'cover' }"
+              :style="{ backgroundImage: userr.profile ? 'url(' + userr.profile + ')' : 'none', backgroundColor: userr.profile ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"
               >
               <!-- had to place a label to enclose input and svg in 
               order for the method to work -->
-              <div class=" absolute top-[40%] left-[35%] bg-black/40 hover:bg-black/70" >
+              <div class=" absolute top-[40%] left-[25%] bg-black/40 hover:bg-black/70 rounded-full p-1" >
                 <label for="profile" class="cursor-pointer">
                   <input
                     ref="profInput"
@@ -145,6 +145,11 @@ export default {
     postId: {
       type: String,
       required: true,
+    },
+  },
+  computed: {
+    backgroundStyle() {
+      return this.userr.background || '#B0A8B9';
     },
   },
   methods: {
