@@ -110,7 +110,9 @@
           class="border-b-2 flex w-fit"
           :class="{ 'justify-end w-full': shownotif }"
         >
-          <h1 @click="notif" class="text-base font-semibold cursor-pointer">
+          <h1 @click="notif" 
+          class="text-base font-semibold cursor-pointer text-[#2c6dbd] 
+          hover:bg-gray-100 rounded-full m-1 p-1 transition ease-in-out delay-300">
             Notifications
           </h1>
         </div>
@@ -144,7 +146,9 @@
           class="border-b-2 flex w-fit"
           :class="{ 'justify-end w-full': showlikes }"
         >
-          <h1 @click="likes" class="text-base font-semibold cursor-pointer">
+          <h1 @click="likes" class="text-base font-semibold 
+          cursor-pointer text-[#2c6dbd] hover:bg-gray-100 
+          rounded-full m-1 p-1 transition ease-in-out delay-300">
             Favorites
           </h1>
         </div>
@@ -286,6 +290,7 @@ export default {
       } catch (error) {
         console.error("Error deleting shared post:", error);
       }
+      this.user = userr
     },
     async getlikedposts() {
       try {
