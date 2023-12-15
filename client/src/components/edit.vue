@@ -33,7 +33,7 @@
             <!-- background -->
             <div class="w-full h-[250px] grid place-items-center border-2"
             :style="{ backgroundImage: userr.background ? 'url(' + userr.background + ')' : 'none', backgroundColor: userr.background ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }">
-              <div class="bg-cover" >
+              <div>
                 <div class=" bg-black/40 hover:bg-black/70 rounded-full p-1" >
                   <label for="background" class="cursor-pointer">
                     <input

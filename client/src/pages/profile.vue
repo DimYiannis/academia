@@ -31,14 +31,18 @@
             Hello there: {{ user.name }}
           </h1>
         </div>
-
-        <div class="mt-2 mr-3">
-          <img class="w-[700px] rounded-md" :src="user.background" />
+        <!-- Background -->
+        <div class=" h-[250px] grid place-items-center  mr-1"
+            :style="{ backgroundImage: user.background ? 'url(' + userr.background + ')' : 'none', backgroundColor: userr.background ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"> 
         </div>
+
+        <!--prof image-->
         <div class="relative">
           <div class="flex justify-between items-start">
-            <div class="rounded-full ml-4 w-20 h-20 absolute -top-16 left-2">
-              <!--prof image-->
+            <div class="rounded-full ml-4 w-20 h-32 absolute -top-16 left-2 border-2"
+            :style="{ backgroundImage: user.profile ? 'url(' + userr.profile + ')' : 'none', backgroundColor: userr.profile ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"
+            >
+              
               <img class="object-cover rounded-full" :src="user.profile" />
             </div>
             <div>
@@ -46,7 +50,7 @@
               <nav
                 class="flex mt-6 mr-3 text-lg font-semobold absolute right-0"
               >
-                <button @click="edit" class="">Edit Profile</button>
+                <button @click="edit" class="-mr-2">Edit Profile</button>
               </nav>
             </div>
           </div>
