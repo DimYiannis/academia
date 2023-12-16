@@ -32,7 +32,7 @@
             
             <!-- background -->
             <div class="w-full h-[250px] grid place-items-center border-2"
-            :style="{ backgroundImage: userr.background ? 'url(' + userr.background + ')' : 'none', backgroundColor: userr.background ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }">
+            :style="{ backgroundImage: userr.backgroundImg ? 'url(' + userr.backgroundImg + ')' : 'none', backgroundColor: userr.backgroundImg ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }">
               <div>
                 <div class=" bg-black/40 hover:bg-black/70 rounded-full p-1" >
                   <label for="background" class="cursor-pointer">
@@ -64,7 +64,7 @@
             <div class="relative h-0">
               <div
               class="absolute -top-24 left-2 rounded-full w-16 h-28 ml-3 border-2"
-              :style="{ backgroundImage: userr.profile ? 'url(' + userr.profile + ')' : 'none', backgroundColor: userr.profile ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"
+              :style="{ backgroundImage: userr.profileImg ? 'url(' + userr.profileImg + ')' : 'none', backgroundColor: userr.profileImg ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"
               >
               <!-- had to place a label to enclose input and svg in 
               order for the method to work -->
@@ -163,6 +163,7 @@ export default {
       };
 
       this.$emit("edit-prof", updateProf);
+      console.log(userr)
     },
     focusInput() {
       // Focus on the name input when the div with ref nameInput is clicked

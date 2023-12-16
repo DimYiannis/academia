@@ -1,13 +1,13 @@
 require('dotenv').config();
-const mockData = require('./db/mock_data.json');
-const Post= require('./models/Post');
+const users = require('./db/users.json');
+const User= require('./models/User');
 const connectDB = require('./db/connect');
 
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URL);
 
-    await Post.create(mockData);
+    await User.create(users);
     console.log('Success !!!');
     process.exit(0);
   } catch (error) {

@@ -31,7 +31,11 @@ const UserSchema = new mongoose.Schema({
   info: {
     type: String,
   },
-  image: {
+  profileImg: {
+    type: String,
+    default: '/uploads/example.jpeg',
+  },
+  backgroundImg: {
     type: String,
     default: '/uploads/example.jpeg',
   },

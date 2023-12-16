@@ -29,19 +29,19 @@
       <div class="grid gap-2 w-full">
         <div>
           <h1 class="text-xl font-semibold mt-4 capitalize border-b-2">
-            Hello there: {{ user.name }}
+            
           </h1>
         </div>
 
         <div
           class="mt-2 h-[250px] bg-cover bg-center mr-1"
-          :style="{ backgroundImage: 'url(' + user.background + ')' }"
+          :style="{ backgroundImage: 'url(' + user.backgroundImg + ')' }"
         ></div>
         <div class="relative">
           <div class="flex justify-between items-start">
             <div class="rounded-full ml-4 w-20 h-20 absolute -top-16 left-2">
               <!--prof image-->
-              <img class="object-cover rounded-full" :src="user.profile" />
+              <img class="object-cover rounded-full" :src="user.profileImg" />
             </div>
             <div>
               <!--edit prof-->

@@ -33,17 +33,16 @@
         </div>
         <!-- Background -->
         <div class=" h-[250px] grid place-items-center  mr-1"
-            :style="{ backgroundImage: user.background ? 'url(' + userr.background + ')' : 'none', backgroundColor: userr.background ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"> 
+            :style="{ backgroundImage: user.backgroundImg ? 'url(' + user.backgroundImg + ')' : 'none', backgroundColor: user.background ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"> 
         </div>
 
         <!--prof image-->
         <div class="relative">
           <div class="flex justify-between items-start">
             <div class="rounded-full ml-4 w-20 h-32 absolute -top-16 left-2 border-2"
-            :style="{ backgroundImage: user.profile ? 'url(' + userr.profile + ')' : 'none', backgroundColor: userr.profile ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"
+            :style="{ backgroundImage: user.profileImg ? 'url(' + user.profileImg + ')' : 'none', backgroundColor: user.profile ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"
             >
               
-              <img class="object-cover rounded-full" :src="user.profile" />
             </div>
             <div>
               <!--edit prof-->
@@ -239,7 +238,7 @@ export default {
       likedposts: [],
       loading: false,
       showedit:false,
-      userr: this.user
+      userr: this.user,
     };
   },
   props: {

@@ -26,7 +26,7 @@
           </svg>
         </div>
         <div class="flex mt-5">
-          <img class="rounded-full w-10 h-10 mt-2" :src="user.profile" />
+          <img class="rounded-full w-10 h-10 mt-2" :src="user.profileImg" />
           <input
             v-model="postContent"
             type="text"
