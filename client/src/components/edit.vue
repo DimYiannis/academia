@@ -142,10 +142,6 @@ export default {
       type: Object,
       required: true,
     },
-    postId: {
-      type: String,
-      required: true,
-    },
   },
   computed: {
     backgroundStyle() {
@@ -158,7 +154,6 @@ export default {
     },
     update() {
       const updateProf = {
-        postId: this.postId,
         content: this.postContent,
       };
 
@@ -170,20 +165,13 @@ export default {
       this.$refs.nameInput.focus();
     },
     focusInput2() {
-      // Focus on the name input when the div with ref nameInput is clicked
       this.$refs.infoInput.focus();
       console.log(this.userr);
     },
-    handleFileChange(event) {
-      // Placeholder method for handling file changes
-
-      // Add your logic here to handle the selected file
+    handleFileChange(event) {   
       this.$refs.profInput.focus();
     },
     handleFileChange2(event) {
-      // Placeholder method for handling file changes
-
-      // Add your logic here to handle the selected file
       this.$refs.backInput.focus();
     },
   },

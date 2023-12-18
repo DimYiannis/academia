@@ -1,9 +1,9 @@
 <template>
   <div class="flex gap-10">
     <!--SideBar-->
-    <aside class="grid gap-2 mt-12 border-r-2">
+    <aside class="mobile:grid gap-2 mt-12 border-r-2 hidden">
       <div class="grid gap-1 mr-12">
-        <div class="flex gap-2">
+        <router-link to="/profile" class="flex gap-2 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -19,9 +19,14 @@
               d="M15.75 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
             />
           </svg>
-          <router-link to="/profile">Profile</router-link>
-        </div>
-        <div class="flex gap-2">
+          <h1 class="hidden tablet:contents">Profile</h1>
+        </router-link>
+
+        <router-link
+          to="/posts"
+          class="flex gap-2 items-center"
+          @click="getposts"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -37,10 +42,14 @@
               d="m21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
             />
           </svg>
-          <router-link to="/posts"
-          @click="getposts">Explore</router-link>
-        </div>
-        <div class="flex gap-2">
+          <h1 class="hidden tablet:contents">Explore</h1>
+        </router-link>
+
+        <router-link
+          class="flex gap-2 items-center"
+          @click="notif"
+          to="/profile"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -56,9 +65,10 @@
               d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
             />
           </svg>
-          <router-link @click="notif" to="/profile"> Notifications</router-link>
-        </div>
-        <div class="flex gap-2">
+          <h1 class="hidden tablet:contents">Notifications</h1>
+        </router-link>
+
+        <router-link to="/messages" class="flex gap-2 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -74,9 +84,10 @@
               d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
             />
           </svg>
-          <router-link to="/messages">Messages</router-link>
-        </div>
-        <div class="flex gap-2">
+          <h1 class="hidden tablet:contents">Messages</h1>
+        </router-link>
+
+        <router-link to="/bookmarks" class="flex gap-2 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -92,9 +103,10 @@
               d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25L4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
             />
           </svg>
-          <router-link to="/bookmarks">Bookmarks</router-link>
-        </div>
-        <div class="flex gap-2">
+          <h1 class="hidden tablet:contents">Bookmarks</h1>
+        </router-link>
+
+        <router-link to="/sharedposts" class="flex gap-2 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -110,8 +122,8 @@
               d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m-6 3.75l3 3m0 0l3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
             />
           </svg>
-          <router-link to="/sharedposts">Shared Posts</router-link>
-        </div>
+          <h1 class="hidden tablet:contents">Shared Posts</h1>
+        </router-link>
       </div>
 
       <button class="m-0" @click="logout()">logout</button>
@@ -120,7 +132,8 @@
     <main class="w-full">
       <div class="h-screen overflow-auto no-scrollbar">
         <router-view
-          :posts="posts" :loading="loading"
+          :posts="posts"
+          :loading="loading"
           @update-posts="getsinglepost"
           :user="user"
           @show-notif="notif"
@@ -129,6 +142,134 @@
       </div>
     </main>
   </div>
+  <!--mobile sidebar -->
+  <footer
+    class="fixed bottom-0 left-0 z-50 w-full h-fit 
+    bg-white gap-2 mobile:hidden p-1 overflow-y"
+  >
+    <div class="flex w-full h-full justify-evenly">
+      <router-link to="/profile" class="block">
+        <svg
+          class="h-5 w-5 smallscreen:h-8 smallscreen:w-8"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M15.75 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+          />
+        </svg>
+      </router-link>
+
+      <router-link
+        to="/posts"
+        class="block"
+        @click="getposts"
+      >
+        <svg
+          class="h-5 w-5 smallscreen:h-8 smallscreen:w-8"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="m21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+          />
+        </svg>
+        <h1 class="hidden tablet:contents">Explore</h1>
+      </router-link>
+
+      <router-link class="block" @click="notif" to="/profile">
+        <svg
+          class="h-5 w-5 smallscreen:h-8 smallscreen:w-8"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+          />
+        </svg>
+      </router-link>
+
+      <router-link to="/messages" class="block">
+        <svg
+          class="h-5 w-5 smallscreen:h-8 smallscreen:w-8"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+          />
+        </svg>
+      </router-link>
+
+      <router-link to="/bookmarks" class="block">
+        <svg
+          class="h-5 w-5 smallscreen:h-8 smallscreen:w-8"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25L4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+          />
+        </svg>
+      </router-link>
+
+      <router-link to="/sharedposts" class="block">
+        <svg
+          class="h-5 w-5 smallscreen:h-8 smallscreen:w-8"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m-6 3.75l3 3m0 0l3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
+          />
+        </svg>
+      </router-link>
+
+      <button class="m-0 text-xs smallscreen:text-lg" @click="logout()">logout</button>
+    </div>
+  </footer>
 </template>
 
 <script>
@@ -142,7 +283,7 @@ export default {
       userId: "",
       user: "",
       postId: "",
-      loading:false,
+      loading: false,
       posts: [
         {
           liked: false,
@@ -199,9 +340,8 @@ export default {
         this.posts = response.data.posts;
       } catch (error) {
         console.error(error.response.data);
-      }
-      finally {
-        this.loading = false
+      } finally {
+        this.loading = false;
       }
     },
     notif() {

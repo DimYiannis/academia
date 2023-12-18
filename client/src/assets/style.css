@@ -51,6 +51,12 @@ button:hover {
   background-color: #2c6dbd;
 }
 
+@media (max-width: 500px) {
+  body {
+    margin-inline: 0; /* Set margin-inline to 0 when screen is below 500px */
+  }
+}
+
 
 @tailwind components;
 

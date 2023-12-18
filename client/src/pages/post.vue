@@ -2,7 +2,7 @@
   <div class="grid">
     <nav class="mb-10 mt-6 flex">
       <div
-        class="flex relative w-1/2 mx-2 rounded-3xl border-2 border-[#388aef] group p-1"
+        class="flex relative w-full laptop:w-1/2 mx-2 rounded-3xl border-2 border-[#388aef] group p-1"
       >
         <input
           class="w-full ml-3 focus:outline-none caret-[#388aef]"
