@@ -34,16 +34,17 @@
         <div class="grid post-header items-center mb-2">
           <h1 class="text-lg font-semibold">
             <router-link
-              class="underline decoration-sky-500 capitalize"
+              class="underline decoration-sky-500 capitalize text-sm 
+              smallscreen:text-base"
               :to="'/article/' + j.doi"
               >{{ j.postDetails?.title }}</router-link
             >
           </h1>
-          <h2>Author: {{ j.postDetails?.authors }}</h2>
-          <h2>Institutions: {{ j.postDetails?.university }}</h2>
-          <h3>Year: {{ j.postDetails?.date }}</h3>
-          <p class="line-clamp-3">Abstract: {{ j.postDetails?.abstract }}</p>
-          <h3>doi: {{ j.postDetails?.doi }}</h3>
+          <h2 class="text-sm smallscreen:text-base">Author: {{ j.postDetails?.authors }}</h2>
+          <h2 class="text-sm smallscreen:text-base">Institutions: {{ j.postDetails?.university }}</h2>
+          <h3 class="text-sm smallscreen:text-base">Year: {{ j.postDetails?.date }}</h3>
+          <p class="line-clamp-3 text-sm smallscreen:text-base">Abstract: {{ j.postDetails?.abstract }}</p>
+          <h3 class="text-sm smallscreen:text-base">doi: {{ j.postDetails?.doi }}</h3>
 
           <div class="flex justify-between mt-4">
             <div>

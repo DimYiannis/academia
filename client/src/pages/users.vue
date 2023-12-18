@@ -23,14 +23,11 @@
       </div>
     </div>
   </div>
-  <main v-else class="flex mt-8 h-fit ml-20 w-5/6 ">
-    
-    <section class=" h-full max-w-[600px] border-r-2">
+  <main v-else class="flex mt-8 h-fit ml-20 w-5/6">
+    <section class="h-full max-w-[600px] border-r-2">
       <div class="grid gap-2 w-full">
         <div>
-          <h1 class="text-xl font-semibold mt-4 capitalize border-b-2">
-            
-          </h1>
+          <h1 class="text-xl font-semibold mt-4 capitalize border-b-2"></h1>
         </div>
 
         <div
@@ -45,9 +42,7 @@
             </div>
             <div>
               <!--edit prof-->
-              <nav
-                class="flex mt-6 text-lg font-semobold absolute right-0"
-              >
+              <nav class="flex mt-6 text-lg font-semobold absolute right-0">
                 <button class="">Connect</button>
               </nav>
             </div>
@@ -97,8 +92,7 @@
                   showSharedPosts,
               }"
               class="border p-4 mb-4 rounded-3xl"
-              v-for="i of sharedposts"
-            >
+              v-for="i of sharedposts">
               <h1>Post made by: {{ i.user.name }}</h1>
               <p>{{ i.title }}</p>
 
@@ -106,8 +100,7 @@
               <div
                 v-show="showSharedPosts"
                 v-for="j in i.sharedpostdetails"
-                class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl"
-              >
+                class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl">
                 <div class="grid items-center">
                   <h1 class="text-lg font-semibold">
                     <router-link

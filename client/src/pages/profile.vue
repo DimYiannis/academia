@@ -24,7 +24,7 @@
     </div>
   </div>
   <main v-else class="flex mt-8 h-fit w-full">
-    <section class="w-3/5 border-r-2 h-full">
+    <section class=" laptop:border-r-2 h-full">
       <div class="grid gap-2 w-full">
         <div>
           <h1 class="text-xl font-semibold mt-4 capitalize border-b-2">
@@ -32,18 +32,32 @@
           </h1>
         </div>
         <!-- Background -->
-        <div class=" h-[250px] grid place-items-center  mr-1"
-            :style="{ backgroundImage: user.backgroundImg ? 'url(' + user.backgroundImg + ')' : 'none', backgroundColor: user.background ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"> 
-        </div>
+        <div
+          class="h-[250px] grid place-items-center mr-1"
+          :style="{
+            backgroundImage: user.backgroundImg
+              ? 'url(' + user.backgroundImg + ')'
+              : 'none',
+            backgroundColor: user.background ? '' : '#B0A8B9',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }"
+        ></div>
 
         <!--prof image-->
         <div class="relative">
           <div class="flex justify-between items-start">
-            <div class="rounded-full ml-4 w-20 h-32 absolute -top-16 left-2 border-2"
-            :style="{ backgroundImage: user.profileImg ? 'url(' + user.profileImg + ')' : 'none', backgroundColor: user.profile ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"
-            >
-              
-            </div>
+            <div
+              class="rounded-full ml-4 w-20 h-32 absolute -top-16 left-2 border-2"
+              :style="{
+                backgroundImage: user.profileImg
+                  ? 'url(' + user.profileImg + ')'
+                  : 'none',
+                backgroundColor: user.profile ? '' : '#B0A8B9',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }"
+            ></div>
             <div>
               <!--edit prof-->
               <nav
@@ -64,14 +78,44 @@
       <div>
         <!--content-->
         <div class="grid mt-12">
-          <div class="border-b-2">
-            <h1 class="text-base font-semibold mb-2">Shared Posts</h1>
+          <div class="flex gap-2 border-b-2">
+            <h1
+              @click="SharedPosts"
+              class="text-base font-semibold cursor-pointer"
+              :class="{
+                'underline decoration-4 decoration-sky-500 underline-offset-4':
+                  showSharedPosts,
+              }">
+              Shared Posts
+            </h1>
+            <h1
+              @click="favorites"
+              class="text-base font-semibold cursor-pointer"
+              :class="{
+                'underline decoration-4 decoration-sky-500 underline-offset-4':
+                  showfavorites,
+              }">
+              Favorites
+            </h1>
+            <h1
+              @click="notif"
+              class="text-base font-semibold cursor-pointer"
+              :class="{
+                'underline decoration-4 decoration-sky-500 underline-offset-4':
+                  shownotif,
+              }">
+              Notifications
+            </h1>
           </div>
 
           <main
             class="h-screen mt-5 mr-2 overflow-hidden overflow-y-auto overscroll-auto"
           >
-            <div class="border p-4 mb-4 rounded-3xl" v-for="i of sharedposts">
+            <div
+              v-show="showSharedPosts"
+              class="border p-4 mb-4 rounded-3xl"
+              v-for="i of sharedposts"
+            >
               <h1>Post made by: {{ i.user.name }}</h1>
               <p>{{ i.title }}</p>
 
@@ -100,130 +144,112 @@
               </div>
               <button @click="deletepost(i._id)">Delete Post</button>
             </div>
-          </main>
-        </div>
-      </div>
-    </section>
-
-    <!--right bar-->
-    <section class="mt-5 ml-10 w-2/5">
-      <!--Notif-->
-      <div class="">
-        <div
-          class="border-b-2 flex w-fit"
-          :class="{ 'justify-end w-full': shownotif }"
-        >
-          <h1 @click="notif" 
-          class="text-base font-semibold cursor-pointer text-[#2c6dbd] 
-          hover:bg-gray-100 rounded-full m-1 p-1 transition ease-in-out delay-300">
-            Notifications
-          </h1>
-        </div>
-
-        <!--content-->
-        <div>
-          <div
-            :class="{
-              ' border-[#388aef] transition-opacity ease-out duration-500 opacity-0':
-                !shownotif,
-              'transition-opacity ease-in duration-500 opacity-100': shownotif,
-            }"
-          >
-            <div class="grid mt-5">
-              <div class="grid justify-items-center">
-                <h1
-                  class="font-semibold text-lg bg-[#388aef] text-white rounded-md p-2"
-                >
-                  Not any notifications yet!
-                </h1>
-                <img src="../assets/notif.jpg" class="w-[500px] h-[fit" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--Likes-->
-      <div class="mt-34">
-        <div
-          class="border-b-2 flex w-fit"
-          :class="{ 'justify-end w-full': showlikes }"
-        >
-          <h1 @click="likes" class="text-base font-semibold 
-          cursor-pointer text-[#2c6dbd] hover:bg-gray-100 
-          rounded-full m-1 p-1 transition ease-in-out delay-300">
-            Favorites
-          </h1>
-        </div>
-
-        <!--content-->
-        <div>
-          <div
-            :class="{
-              'transition-opacity ease-out duration-500 opacity-0': !showlikes,
-              'transition-opacity ease-in duration-500 opacity-100': showlikes,
-            }"
-          >
-            <main
-              class="h-screen mt-5 mr-2 overflow-hidden overflow-y-auto overscroll-auto"
-            >
-              <div
-                class="border p-4 mb-4 rounded-3xl grid"
-                v-for="i of likedposts"
-              >
-                <svg
-                  @click="unlike(i._id)"
-                  class="cursor-pointer justify-self-end"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 
-                    0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 
-                    13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12L5.47 
-                    6.53a.75.75 0 0 1 0-1.06Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-
-                <div
-                  v-for="j in [i.postDetails]"
-                  class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl"
-                >
-                  <div class="grid items-center">
-                    <h1 class="text-lg font-semibold">
-                      <router-link
-                        class="underline decoration-[#388aef] capitalize"
-                        :to="'/article/' + j.doi"
-                        >{{ j.title }}</router-link
-                      >
-                    </h1>
-                    <h2>Author: {{ j.authors }}</h2>
-                    <h2>Institutions: {{ j.university }}</h2>
-                    <h3>Year: {{ j.date }}</h3>
-                  </div>
-                  <div class="post-content mb-2">
-                    <p class="line-clamp-3">Abstract: {{ j.abstract }}</p>
-                    <h3>doi: {{ j.doi }}</h3>
+            <!--right bar in to the main for small screens-->
+            <section class="laptop:grid laptop:mt-5 ml-10 ">
+              <!--Notif-->
+              <div class="">
+              
+                <!--content-->
+                <div v-show="shownotif">
+                  <div
+                    :class="{
+                      ' border-[#388aef] transition-opacity ease-out duration-500 opacity-0':
+                        !shownotif,
+                      'transition-opacity ease-in duration-500 opacity-100':
+                        shownotif,
+                    }"
+                  >
+                    <div class="grid mt-5">
+                      <div class="grid justify-items-center">
+                        <h1
+                          class="font-semibold text-lg bg-[#388aef] text-white rounded-md p-2"
+                        >
+                          Not any notifications yet!
+                        </h1>
+                        <img
+                          src="../assets/notif.jpg"
+                          class="w-[500px] h-[fit"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </main>
-          </div>
+
+              <!--Likes-->
+              <div class="mt-34 w-full">
+                <!--content-->
+                <div class="w-full">
+                  <div
+                    :class="{
+                      'opacity-0':
+                        !showfavorites || this.shownotif,
+                      'transition-opacity ease-in duration-500 opacity-100 w-full':
+                        showfavorites,
+                    }">
+                    <main
+                      class="h-screen w-full mt-5 mr-2 overflow-hidden overflow-y-auto overscroll-auto"
+                    >
+                      <div
+                        class="w-full border p-4 mb-4 rounded-3xl grid"
+                        v-for="i of likedposts"
+                      >
+                        <svg
+                          @click="unlike(i._id)"
+                          class="cursor-pointer justify-self-end"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="26"
+                          height="26"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            fill-rule="evenodd"
+                            d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 
+                    0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 
+                    13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12L5.47 
+                    6.53a.75.75 0 0 1 0-1.06Z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+
+                        <div
+                          v-for="j in [i.postDetails]"
+                          class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl"
+                        >
+                          <div class="grid items-center">
+                            <h1 class="text-lg font-semibold">
+                              <router-link
+                                class="underline decoration-[#388aef] capitalize"
+                                :to="'/article/' + j.doi"
+                                >{{ j.title }}</router-link
+                              >
+                            </h1>
+                            <h2>Author: {{ j.authors }}</h2>
+                            <h2>Institutions: {{ j.university }}</h2>
+                            <h3>Year: {{ j.date }}</h3>
+                          </div>
+                          <div class="post-content mb-2">
+                            <p class="line-clamp-3">
+                              Abstract: {{ j.abstract }}
+                            </p>
+                            <h3>doi: {{ j.doi }}</h3>
+                          </div>
+                        </div>
+                      </div>
+                    </main>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
         </div>
       </div>
     </section>
   </main>
 
   <Teleport to="#modal2">
-    <edit
-    :userr="userr"
-    v-show="showedit"
-    @close-modal="edit"/>
+    <edit :userr="userr" v-show="showedit" @close-modal="edit" />
   </Teleport>
 </template>
 
@@ -237,8 +263,10 @@ export default {
       showlikes: false,
       likedposts: [],
       loading: false,
-      showedit:false,
+      showedit: false,
       userr: this.user,
+      showSharedPosts: true,
+      showfavorites: false,
     };
   },
   props: {
@@ -252,7 +280,7 @@ export default {
     },
   },
   components: {
-    edit
+    edit,
   },
   mounted() {
     // Invoke when the component is mounted
@@ -293,7 +321,7 @@ export default {
       } catch (error) {
         console.error("Error deleting shared post:", error);
       }
-      this.user = userr
+      this.user = userr;
     },
     async getlikedposts() {
       try {
@@ -323,12 +351,29 @@ export default {
     likes() {
       this.showlikes = !this.showlikes;
     },
+    favorites() {
+      if (this.shownotif) {
+        this.$emit("show-notif");
+      }
+      
+      this.showfavorites = true;
+      this.showSharedPosts = false;
+    },
     notif() {
       this.$emit("show-notif");
+      this.showSharedPosts = false;
+      this.showfavorites = false;
     },
     edit() {
-      this.showedit = !this.showedit
-    }
+      this.showedit = !this.showedit;
+    },
+    SharedPosts() {
+      if (this.shownotif) {
+        this.$emit("show-notif");
+      }
+      this.showSharedPosts = true;
+      this.showfavorites = false;
+    },
   },
 };
 </script>
