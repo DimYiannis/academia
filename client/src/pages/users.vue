@@ -32,14 +32,28 @@
 
         <div
           class="mt-2 h-[250px] bg-cover bg-center mr-1"
-          :style="{ backgroundImage: 'url(' + user.backgroundImg + ')' }"
+          :style="{
+            backgroundImage: user.backgroundImg
+              ? 'url(http://localhost:5000' + user.backgroundImg + ')'
+              : 'none',
+            backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }"
         ></div>
         <div class="relative">
           <div class="flex justify-between items-start">
-            <div class="rounded-full ml-4 w-20 h-20 absolute -top-16 left-2">
-              <!--prof image-->
-              <img class="object-cover rounded-full" :src="user.profileImg" />
-            </div>
+            <div
+              class="rounded-full ml-4 w-20 h-32 absolute -top-16 left-2"
+              :style="{
+                backgroundImage: user.profileImg
+                  ? 'url(http://localhost:5000' + user.profileImg + ')'
+                  : 'none',
+                backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }"
+            ></div>
             <div>
               <!--edit prof-->
               <nav class="flex mt-6 text-lg font-semobold absolute right-0">
@@ -92,7 +106,8 @@
                   showSharedPosts,
               }"
               class="border p-4 mb-4 rounded-3xl"
-              v-for="i of sharedposts">
+              v-for="i of sharedposts"
+            >
               <h1>Post made by: {{ i.user.name }}</h1>
               <p>{{ i.title }}</p>
 
@@ -100,7 +115,8 @@
               <div
                 v-show="showSharedPosts"
                 v-for="j in i.sharedpostdetails"
-                class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl">
+                class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl"
+              >
                 <div class="grid items-center">
                   <h1 class="text-lg font-semibold">
                     <router-link

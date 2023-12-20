@@ -3,8 +3,9 @@
     class="w-full h-full bg-black/30 left-0 top-0 fixed grid justify-items-center z-10"
     @click.self="closemodal"
   >
-    <div class="w-full h-full mobile:w-[500px] mobile:h-[550px]
-    relative mt-10 rounded-lg bg-white z-20">
+    <div
+      class="w-full h-full mobile:w-[500px] mobile:h-[550px] relative mt-10 rounded-lg bg-white z-20"
+    >
       <div class="h-full m-5">
         <div class="flex h-fit">
           <svg
@@ -30,12 +31,20 @@
         <div class="grid gap-5 mobile:gap-0">
           <!-- photos -->
           <div class=" ">
-            
             <!-- background -->
-            <div class="w-full h-[250px] grid place-items-center border-2 mt-10 mobile:mt-0"
-            :style="{ backgroundImage: userr.backgroundImg ? 'url(' + userr.backgroundImg + ')' : 'none', backgroundColor: userr.backgroundImg ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }">
+            <div
+              class="w-full h-[250px] grid place-items-center border-2 mt-10 mobile:mt-0"
+              :style="{
+                backgroundImage: this.userr.backgroundImg
+                  ? 'url(http://localhost:5000' + userr.backgroundImg + ')'
+                  : 'none',
+                backgroundColor: userr.backgroundImg ? '' : '#B0A8B9',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }"
+            >
               <div>
-                <div class=" bg-black/40 hover:bg-black/70 rounded-full p-1" >
+                <div class="bg-black/40 hover:bg-black/70 rounded-full p-1">
                   <label for="background" class="cursor-pointer">
                     <input
                       ref="backInput"
@@ -64,38 +73,46 @@
             <!-- profile -->
             <div class="relative h-0">
               <div
-              class="absolute -top-24 left-2 rounded-full w-16 h-28 ml-3 border-2"
-              :style="{ backgroundImage: userr.profileImg ? 'url(' + userr.profileImg + ')' : 'none', backgroundColor: userr.profileImg ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }"
+                class="absolute -top-24 left-2 rounded-full w-16 h-28 ml-3 border-2"
+                :style="{
+                  backgroundImage: userr.profileImg
+                    ? 'url(http://localhost:5000' + userr.profileImg + ')'
+                    : 'none',
+                  backgroundColor: userr.profileImg ? '' : '#B0A8B9',
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                }"
               >
-              <!-- had to place a label to enclose input and svg in 
+                <!-- had to place a label to enclose input and svg in 
               order for the method to work -->
-              <div class=" absolute top-[40%] left-[25%] bg-black/40 hover:bg-black/70 rounded-full p-1" >
-                <label for="profile" class="cursor-pointer">
-                  <input
-                    ref="profInput"
-                    type="file"
-                    id="profile"
-                    accept="image/png, image/jpeg"
-                    style="display: none"
-                    @change="handleFileChange"
-                  />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 0 24 24"
-                    width="24px"
-                    fill="white"
-                  >
-                    <path d="M0 0h24v24H0V0z" fill="none" />
-                    <path
-                      d="M18 20H4V6h9V4H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9h-2v9zm-7.79-3.17l-1.96-2.36L5.5 18h11l-3.54-4.71zM20 4V1h-2v3h-3c.01.01 0 2 0 2h3v2.99c.01.01 2 0 2 0V6h3V4h-3z"
+                <div
+                  class="absolute top-[40%] left-[25%] bg-black/40 hover:bg-black/70 rounded-full p-1"
+                >
+                  <label for="profile" class="cursor-pointer">
+                    <input
+                      ref="profInput"
+                      type="file"
+                      id="profile"
+                      accept="image/png, image/jpeg"
+                      style="display: none"
+                      @change="handleFileChange"
                     />
-                  </svg>
-                </label>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24px"
+                      viewBox="0 0 24 24"
+                      width="24px"
+                      fill="white"
+                    >
+                      <path d="M0 0h24v24H0V0z" fill="none" />
+                      <path
+                        d="M18 20H4V6h9V4H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9h-2v9zm-7.79-3.17l-1.96-2.36L5.5 18h11l-3.54-4.71zM20 4V1h-2v3h-3c.01.01 0 2 0 2h3v2.99c.01.01 2 0 2 0V6h3V4h-3z"
+                      />
+                    </svg>
+                  </label>
+                </div>
               </div>
             </div>
-            </div>
-            
           </div>
 
           <div class="h-fit grid gap-5 mobile:gap-0">
@@ -132,9 +149,11 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
+      userName: "",
       userInfo: "",
     };
   },
@@ -146,21 +165,26 @@ export default {
   },
   computed: {
     backgroundStyle() {
-      return this.userr.background || '#B0A8B9';
+      return this.userr.background || "#B0A8B9";
     },
   },
   methods: {
     closemodal() {
       this.$emit("close-modal");
     },
-    update() {
-      const updateProf = {
-        content: this.postContent,
-      };
-
-      this.$emit("edit-prof", updateProf);
-      console.log(userr)
+    async updatedetails() {
+      try {
+        await axios.patch(
+          `http://localhost:5000/api/v1/users/updateUser`,
+          { name: this.userName, info: this.userInfo },
+          { withCredentials: true }
+        );
+        window.location.reload();
+      } catch (error) {
+        console.error("Error updating name and info:", error);
+      }
     },
+
     focusInput() {
       // Focus on the name input when the div with ref nameInput is clicked
       this.$refs.nameInput.focus();
@@ -169,11 +193,48 @@ export default {
       this.$refs.infoInput.focus();
       console.log(this.userr);
     },
-    handleFileChange(event) {   
+    getImageDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          resolve(reader.result);
+        };
+
+        reader.onerror = (error) => {
+          reject(error);
+        };
+
+        // Read the file as a data URL
+        reader.readAsDataURL(file);
+      });
+    },
+    handleFileChange(event) {
       this.$refs.profInput.focus();
     },
     handleFileChange2(event) {
       this.$refs.backInput.focus();
+
+      const file = event.target.files[0];
+
+      if (file) {
+        this.getImageDataUrl(file)
+          .then((dataUrl) => {
+            // Update the backgroundImg property
+            this.userr.backgroundImg = dataUrl;
+          })
+          .catch((error) => {
+            console.error("Error reading file:", error);
+          });
+      }
+    },
+    removeBaseUrl(fullUrl, baseUrl) {
+      // Remove the base URL from the full URL
+      return fullUrl.replace(baseUrl, '');
+    },
+    update() {
+      console.log(this.userr);
+      this.updatedetails();
     },
   },
 };

@@ -34,15 +34,19 @@ const showCurrentUser = async (req, res) => {
 // update user's details
 const updateUser = async (req, res) => {
   const { info, name } = req.body;
-  
   const user = await User.findOne({ _id: req.user.userId });
-
-  user.info = info;
-  user.name = name;
+  if (!info) {
+    user.name = name;
+  } else if (!name) {
+    user.info = info;
+  } else {
+    user.info = info;
+    user.name = name;
+  }
 
   await user.save();
-  
-  res.status(StatusCodes.OK).json({ msg: "Success! details updated" });
+
+  res.status(StatusCodes.OK).json({ msg: "Success! " });
 };
 
 const updateUserPassword = async (req, res) => {
@@ -87,7 +91,6 @@ const getUserPosts = async (req, res) => {
 
 const uploadImageprof = async (req, res) => {
   try {
-
     if (!req.files) {
       throw new CustomError.BadRequestError("No File Uploaded");
     }
@@ -105,7 +108,7 @@ const uploadImageprof = async (req, res) => {
       throw new CustomError.BadRequestError("Uploaded file is not an image");
     }
     // size
-    const maxSize =  1024 * 1024;
+    const maxSize = 1024 * 1024;
 
     if (profileImg.size > maxSize) {
       throw new CustomError.BadRequestError(
@@ -140,7 +143,6 @@ const uploadImageprof = async (req, res) => {
 
 const uploadImageback = async (req, res) => {
   try {
-
     if (!req.files) {
       throw new CustomError.BadRequestError("No File Uploaded");
     }
@@ -154,11 +156,14 @@ const uploadImageback = async (req, res) => {
     const backgroundImg = req.files.image;
 
     //type
-    if (!backgroundImg.mimetype || !backgroundImg.mimetype.startsWith("image")) {
+    if (
+      !backgroundImg.mimetype ||
+      !backgroundImg.mimetype.startsWith("image")
+    ) {
       throw new CustomError.BadRequestError("Uploaded file is not an image");
     }
     // size
-    const maxSize =  1024 * 1024;
+    const maxSize = 1024 * 1024;
 
     if (backgroundImg.size > maxSize) {
       throw new CustomError.BadRequestError(
@@ -200,5 +205,4 @@ module.exports = {
   getUserPosts,
   uploadImageprof,
   uploadImageback,
- 
 };

@@ -36,9 +36,9 @@
           class="h-[250px] grid place-items-center mr-3"
           :style="{
             backgroundImage: user.backgroundImg
-              ? 'url(' + user.backgroundImg + ')'
+              ? 'url(http://localhost:5000'  + user.backgroundImg + ')'
               : 'none',
-            backgroundColor: user.background ? '' : '#B0A8B9',
+            backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
           }"
@@ -51,9 +51,9 @@
               class="rounded-full ml-4 w-20 h-32 absolute -top-16 left-2 border-2"
               :style="{
                 backgroundImage: user.profileImg
-                  ? 'url(' + user.profileImg + ')'
+                  ? 'url(http://localhost:5000' + user.profileImg + ')'
                   : 'none',
-                backgroundColor: user.profile ? '' : '#B0A8B9',
+                backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
               }"
@@ -264,7 +264,7 @@ export default {
       likedposts: [],
       loading: false,
       showedit: false,
-      userr: this.user,
+      userr: '',
       showSharedPosts: true,
       showfavorites: false,
     };
@@ -286,6 +286,8 @@ export default {
     // Invoke when the component is mounted
     this.getsharedposts();
     this.getlikedposts();
+    this.userr = this.user
+    //console.log('Profile Image URL:', this.user.profileImg);
   },
   methods: {
     async getsharedposts() {
@@ -299,6 +301,7 @@ export default {
         );
 
         this.sharedposts = response.data.sharedposts;
+        console.log(this.userr);
        // console.log(this.sharedposts);
       } catch (error) {
         console.error("Error fetching user information:", error);
