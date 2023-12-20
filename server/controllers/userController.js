@@ -2,7 +2,12 @@ const User = require("../models/User");
 const Sharedposts = require("../models/Sharedposts");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
-const { createTokenUser, attachCookiesToResponse, checkPermissions } = require("../utils");
+const {
+  createTokenUser,
+  attachCookiesToResponse,
+  checkPermissions,
+} = require("../utils");
+const path = require("path");
 
 const getAllUsers = async (req, res) => {
   console.log(req.user);
@@ -15,16 +20,15 @@ const getSingleUser = async (req, res) => {
   if (!user) {
     throw new CustomError.NotFoundError(`No user with id: ${req.params.id}`);
   }
-  
+
   res.status(StatusCodes.OK).json({ user });
 };
 
 const showCurrentUser = async (req, res) => {
   const user = await User.findOne({ _id: req.user.userId }).select("-password");
-  res.status(StatusCodes.OK).json({ user});
+  res.status(StatusCodes.OK).json({ user });
 
   console.log(req.signedCookies.token);
-  
 };
 
 // update user with findOneAndUpdate
@@ -39,7 +43,7 @@ const updateUser = async (req, res) => {
   user.name = name;
 
   await user.save();
-  
+
   const tokenUser = createTokenUser(user);
   attachCookiesToResponse({ res, user: tokenUser });
   res.status(StatusCodes.OK).json({ user: tokenUser });
@@ -79,9 +83,116 @@ const getUserPosts = async (req, res) => {
     res.status(StatusCodes.OK).json({ sharedposts, count: sharedposts.length });
   } catch (error) {
     console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
   }
+};
 
+const uploadImageprof = async (req, res) => {
+  try {
+
+    if (!req.files) {
+      throw new CustomError.BadRequestError("No File Uploaded");
+    }
+    //get the user
+    const user = await User.findById(req.user.userId);
+
+    if (!user) {
+      throw new CustomError.NotFoundError("User not found");
+    }
+    // get the uploaded image
+    const profileImg = req.files.image;
+
+    //type
+    if (!profileImg.mimetype || !profileImg.mimetype.startsWith("image")) {
+      throw new CustomError.BadRequestError("Uploaded file is not an image");
+    }
+    // size
+    const maxSize =  1024 * 1024;
+
+    if (profileImg.size > maxSize) {
+      throw new CustomError.BadRequestError(
+        "Please upload image smaller than 1MB"
+      );
+    }
+
+    const imagePath = path.join(
+      __dirname,
+      "../public/uploads/" + `${profileImg.name}`
+    );
+
+    // Move the uploaded image to the specified path
+    await profileImg.mv(imagePath);
+
+    // Update the user's profileImg field with the image path
+    user.profileImg = `/uploads/${profileImg.name}`;
+
+    // Save the updated user
+    await user.save();
+
+    res
+      .status(StatusCodes.OK)
+      .json({ user, message: "Profile image uploaded successfully" });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
+};
+
+const uploadImageback = async (req, res) => {
+  try {
+
+    if (!req.files) {
+      throw new CustomError.BadRequestError("No File Uploaded");
+    }
+    //get the user
+    const user = await User.findById(req.user.userId);
+
+    if (!user) {
+      throw new CustomError.NotFoundError("User not found");
+    }
+    // get the uploaded image
+    const backgroundImg = req.files.image;
+
+    //type
+    if (!backgroundImg.mimetype || !backgroundImg.mimetype.startsWith("image")) {
+      throw new CustomError.BadRequestError("Uploaded file is not an image");
+    }
+    // size
+    const maxSize =  1024 * 1024;
+
+    if (backgroundImg.size > maxSize) {
+      throw new CustomError.BadRequestError(
+        "Please upload image smaller than 1MB"
+      );
+    }
+
+    const imagePath = path.join(
+      __dirname,
+      "../public/uploads/" + `${backgroundImg.name}`
+    );
+
+    // Move the uploaded image to the specified path
+    await backgroundImg.mv(imagePath);
+
+    // Update the user's backgroundImg field with the image path
+    user.backgroundImg = `/uploads/${backgroundImg.name}`;
+
+    // Save the updated user
+    await user.save();
+
+    res
+      .status(StatusCodes.OK)
+      .json({ user, message: "Profile image uploaded successfully" });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
 };
 
 module.exports = {
@@ -90,5 +201,7 @@ module.exports = {
   showCurrentUser,
   updateUser,
   updateUserPassword,
-  getUserPosts
+  getUserPosts,
+  uploadImageprof,
+  uploadImageback,
 };

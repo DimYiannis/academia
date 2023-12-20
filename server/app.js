@@ -4,6 +4,7 @@ require("express-async-errors");
 //express
 const express = require("express");
 const app = express();
+const path = require("path");
 
 // rest of the packages
 const morgan = require("morgan");
@@ -39,9 +40,10 @@ app.use(
 );
 
 app.use(morgan("tiny"));
-app.use(express.json());
-app.use(cookieParser(process.env.JWT_SECRET));
 app.use(express.static("./public"))
+app.use(express.json());
+app.use(fileUpload());
+app.use(cookieParser(process.env.JWT_SECRET));
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -52,6 +54,9 @@ app.use(
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
+
+// Serve the 'public/uploads' directory as static files
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
   
 app.get("/api/v1", (req, res) => {
   console.log(req.signedCookies);
@@ -59,7 +64,7 @@ app.get("/api/v1", (req, res) => {
 });
 
 
-app.use(fileUpload());
+
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
