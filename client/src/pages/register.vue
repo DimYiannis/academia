@@ -76,7 +76,7 @@ export default {
         .then((response) => {
           console.log('Redirecting to login page');
           console.log(response.data);
-          alert('Welcome to orbit!');
+          alert('Welcome to Academia!');
           // redirect to another page or show a success message.
           this.$router.push({ name: 'login' });
         })

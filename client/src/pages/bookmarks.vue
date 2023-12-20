@@ -98,7 +98,7 @@ export default {
         );
 
         this.bookmarks = response.data.bookmarks;
-        console.log(this.bookmarks);
+        //console.log(this.bookmarks);
       } catch (error) {
         console.error("Error fetching bookmarks:", error);
       } finally {
@@ -107,7 +107,7 @@ export default {
     },
     async deletebookmark(bookmarkId) {
       try {
-        console.log(this.bookmarks);
+        //console.log(this.bookmarks);
         await axios.delete(
           `http://localhost:5000/api/v1/bookmarks/${bookmarkId}`,
           {

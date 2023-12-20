@@ -299,7 +299,7 @@ export default {
         );
 
         this.sharedposts = response.data.sharedposts;
-        console.log(this.sharedposts);
+       // console.log(this.sharedposts);
       } catch (error) {
         console.error("Error fetching user information:", error);
         console.error("Error response data:", error.response.data);
@@ -330,7 +330,7 @@ export default {
         });
 
         this.likedposts = response.data.likes;
-        console.log(this.likedposts);
+        //console.log(this.likedposts);
       } catch (error) {
         console.error("Error fetching user information:", error);
         console.error("Error response data:", error.response.data);

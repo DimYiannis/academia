@@ -283,7 +283,7 @@ export default {
           `http://localhost:5000/api/v1/posts/${input}`,
           { withCredentials: true }
         );
-        console.log(response.data.post);
+        //console.log(response.data.post);
         const searchedpost = response.data.post;
         // notify the parent component to update the posts data
         this.$emit("update-posts", [searchedpost]);
@@ -298,7 +298,7 @@ export default {
     modal(post_Id) {
       this.postId = post_Id;
       this.showmodal = !this.showmodal;
-      console.log(this.showmodal);
+      //console.log(this.showmodal);
     },
   },
 };

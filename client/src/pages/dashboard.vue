@@ -304,11 +304,11 @@ export default {
     },
     notif() {
       this.shownotif = !this.shownotif;
-      console.log(this.shownotif);
+      //console.log(this.shownotif);
     },
     getsinglepost(searchedpost) {
       this.posts = searchedpost;
-      console.log(searchedpost);
+      //console.log(searchedpost);
     },
   },
 };
