@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div v-else class="grid mx-5 mt-12 border-r-2">
+  <div v-else class="grid mobile:mx-5 mt-12 border-r-2">
     <div class="grid">
       <div class="flex justify-between">
         <h4>Published on: {{ this.post.date }} <br /></h4>

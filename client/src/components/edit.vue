@@ -3,7 +3,8 @@
     class="w-full h-full bg-black/30 left-0 top-0 fixed grid justify-items-center z-10"
     @click.self="closemodal"
   >
-    <div class="w-[500px] h-[550px] relative mt-10 rounded-lg bg-white z-20">
+    <div class="w-full h-full mobile:w-[500px] mobile:h-[550px]
+    relative mt-10 rounded-lg bg-white z-20">
       <div class="h-full m-5">
         <div class="flex h-fit">
           <svg
@@ -26,12 +27,12 @@
           </svg>
         </div>
 
-        <div class="grid ">
+        <div class="grid gap-5 mobile:gap-0">
           <!-- photos -->
           <div class=" ">
             
             <!-- background -->
-            <div class="w-full h-[250px] grid place-items-center border-2"
+            <div class="w-full h-[250px] grid place-items-center border-2 mt-10 mobile:mt-0"
             :style="{ backgroundImage: userr.backgroundImg ? 'url(' + userr.backgroundImg + ')' : 'none', backgroundColor: userr.backgroundImg ? '' : '#B0A8B9', backgroundPosition: 'center', backgroundSize: 'cover' }">
               <div>
                 <div class=" bg-black/40 hover:bg-black/70 rounded-full p-1" >
@@ -97,7 +98,7 @@
             
           </div>
 
-          <div class="h-fit">
+          <div class="h-fit grid gap-5 mobile:gap-0">
             <!-- name -->
             <div class="mt-5 border-2 h-[70px]" @click="focusInput">
               <label for="large-input" class="m-3">Name</label>

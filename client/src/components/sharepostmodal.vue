@@ -3,7 +3,7 @@
     class="w-full h-full bg-black/30 left-0 top-0 fixed grid justify-items-center z-10"
     @click.self="closemodal"
   >
-    <div class="w-[500px] h-fit relative mt-10 rounded-md bg-white z-20">
+    <div class="w-full h-full mobile:w-[500px] mobile:h-fit relative mt-10 rounded-md bg-white z-20">
       <div class="grid gap-4 m-5">
         <div>
           <svg

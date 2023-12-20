@@ -23,9 +23,9 @@
       </div>
     </div>
   </div>
-  <main v-else class="flex mt-8 h-fit w-full">
+  <main v-else class="flex mt-8 h-fit max-w-[800px]" >
     <section class=" laptop:border-r-2 h-full">
-      <div class="grid gap-2 w-full">
+      <div class="grid gap-2 ">
         <div>
           <h1 class="text-xl font-semibold mt-4 capitalize border-b-2">
             Hello there: {{ user.name }}
@@ -33,7 +33,7 @@
         </div>
         <!-- Background -->
         <div
-          class="h-[250px] grid place-items-center mr-1"
+          class="h-[250px] grid place-items-center mr-3"
           :style="{
             backgroundImage: user.backgroundImg
               ? 'url(' + user.backgroundImg + ')'
@@ -63,7 +63,7 @@
               <nav
                 class="flex mt-6 mr-3 text-lg font-semobold absolute right-0"
               >
-                <button @click="edit" class="-mr-2">Edit Profile</button>
+                <button @click="edit" class="mr-1">Edit Profile</button>
               </nav>
             </div>
           </div>
@@ -78,7 +78,7 @@
       <div>
         <!--content-->
         <div class="grid mt-12">
-          <div class="flex gap-2 border-b-2">
+          <div class="flex gap-4 border-b-2">
             <h1
               @click="SharedPosts"
               class="text-base font-semibold cursor-pointer"
