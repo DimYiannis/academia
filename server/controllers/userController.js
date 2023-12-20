@@ -31,22 +31,18 @@ const showCurrentUser = async (req, res) => {
   console.log(req.signedCookies.token);
 };
 
-// update user with findOneAndUpdate
+// update user's details
 const updateUser = async (req, res) => {
-  const { email, name } = req.body;
-  if (!email || !name) {
-    throw new CustomError.BadRequestError("Please provide all values");
-  }
+  const { info, name } = req.body;
+  
   const user = await User.findOne({ _id: req.user.userId });
 
-  user.email = email;
+  user.info = info;
   user.name = name;
 
   await user.save();
-
-  const tokenUser = createTokenUser(user);
-  attachCookiesToResponse({ res, user: tokenUser });
-  res.status(StatusCodes.OK).json({ user: tokenUser });
+  
+  res.status(StatusCodes.OK).json({ msg: "Success! details updated" });
 };
 
 const updateUserPassword = async (req, res) => {
@@ -204,4 +200,5 @@ module.exports = {
   getUserPosts,
   uploadImageprof,
   uploadImageback,
+ 
 };
