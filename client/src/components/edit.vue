@@ -215,18 +215,6 @@ export default {
     handleFileChange2(event) {
       this.$refs.backInput.focus();
 
-      const file = event.target.files[0];
-
-      if (file) {
-        this.getImageDataUrl(file)
-          .then((dataUrl) => {
-            // Update the backgroundImg property
-            this.userr.backgroundImg = dataUrl;
-          })
-          .catch((error) => {
-            console.error("Error reading file:", error);
-          });
-      }
     },
     removeBaseUrl(fullUrl, baseUrl) {
       // Remove the base URL from the full URL

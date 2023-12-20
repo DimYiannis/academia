@@ -286,8 +286,6 @@ export default {
     // Invoke when the component is mounted
     this.getsharedposts();
     this.getlikedposts();
-    this.userr = this.user
-    //console.log('Profile Image URL:', this.user.profileImg);
   },
   methods: {
     async getsharedposts() {
@@ -301,6 +299,7 @@ export default {
         );
 
         this.sharedposts = response.data.sharedposts;
+        this.userr = this.user 
         console.log(this.userr);
        // console.log(this.sharedposts);
       } catch (error) {
