@@ -143,6 +143,7 @@ const uploadImageprof = async (req, res) => {
 
 const uploadImageback = async (req, res) => {
   try {
+    console.log(req.files);
     if (!req.files) {
       throw new CustomError.BadRequestError("No File Uploaded");
     }
