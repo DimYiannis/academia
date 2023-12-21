@@ -90,6 +90,7 @@ const getUserPosts = async (req, res) => {
 };
 
 const uploadImageprof = async (req, res) => {
+  console.log(req.files);
   try {
     if (!req.files) {
       throw new CustomError.BadRequestError("No File Uploaded");

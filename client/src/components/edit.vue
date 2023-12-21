@@ -91,9 +91,9 @@
                 >
                   <label for="profile" class="cursor-pointer">
                     <input
-                      v-bind="profilePic"
                       ref="profInput"
                       type="file"
+                      name="image"
                       id="profile"
                       accept="image/png, image/jpeg"
                       style="display: none"
@@ -196,6 +196,11 @@ export default {
 
     handleFileChange(event) {
       this.$refs.profInput.focus();
+      const file = event.target.files[0];
+      if (file) {
+        this.profilePic = file;
+      }
+      console.log(file);
     },
     handleFileChange2(event) {
       this.$refs.backInput.focus();
@@ -226,9 +231,30 @@ export default {
       }
     },
 
+    async uploadProfileImg() {
+      try {
+        console.log(this.profilePic); 
+
+        axios.post(
+          "http://localhost:5000/api/v1/users/uploadprofimage",
+          { image: this.profilePic },
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "multipart/form-data", 
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
+    },
+
+
     update() {
       //this.updatedetails();
-      this.uploadBackgroundImg();
+      //this.uploadBackgroundImg();
+      this.uploadProfileImg()
       console.log(this.userr);
     },
   },
