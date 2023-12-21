@@ -299,7 +299,7 @@ export default {
         );
 
         this.sharedposts = response.data.sharedposts;
-        this.userr = this.user 
+        
         console.log(this.userr);
        // console.log(this.sharedposts);
       } catch (error) {
@@ -309,6 +309,8 @@ export default {
       } finally {
         this.loading = false;
       }
+      this.userr = this.user 
+      console.log(this.userr);
     },
     async deletepost(postId) {
       try {

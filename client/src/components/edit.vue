@@ -1,10 +1,10 @@
 <template>
   <div
-    class="w-full h-full bg-black/30 left-0 top-0 fixed grid justify-items-center z-10"
+    class="w-full h-full bg-black/30 left-0 top-0 fixed grid justify-items-center z-20"
     @click.self="closemodal"
   >
     <div
-      class="w-full h-full mobile:w-[500px] mobile:h-[550px] relative mt-10 rounded-lg bg-white z-20"
+      class="w-full h-full mobile:w-[500px] mobile:h-[550px] relative mobile:mt-10 rounded-lg bg-white z-50"
     >
       <div class="h-full m-5">
         <div class="flex h-fit">
@@ -49,6 +49,7 @@
                     <input
                       ref="backInput"
                       type="file"
+                      name="image"
                       id="background"
                       accept="image/png, image/jpeg"
                       style="display: none"
@@ -90,6 +91,7 @@
                 >
                   <label for="profile" class="cursor-pointer">
                     <input
+                      v-bind="profilePic"
                       ref="profInput"
                       type="file"
                       id="profile"
@@ -155,6 +157,8 @@ export default {
     return {
       userName: "",
       userInfo: "",
+      backgroundPic: "",
+      profilePic: "",
     };
   },
   props: {
@@ -163,11 +167,7 @@ export default {
       required: true,
     },
   },
-  computed: {
-    backgroundStyle() {
-      return this.userr.background || "#B0A8B9";
-    },
-  },
+  computed: {},
   methods: {
     closemodal() {
       this.$emit("close-modal");
@@ -193,36 +193,43 @@ export default {
       this.$refs.infoInput.focus();
       console.log(this.userr);
     },
-    getImageDataUrl(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
 
-        reader.onload = () => {
-          resolve(reader.result);
-        };
-
-        reader.onerror = (error) => {
-          reject(error);
-        };
-
-        // Read the file as a data URL
-        reader.readAsDataURL(file);
-      });
-    },
     handleFileChange(event) {
       this.$refs.profInput.focus();
     },
     handleFileChange2(event) {
       this.$refs.backInput.focus();
 
+      const file = event.target.files[0];
+      if (file) {
+        this.backgroundPic = file;
+      }
+      console.log(file);
     },
-    removeBaseUrl(fullUrl, baseUrl) {
-      // Remove the base URL from the full URL
-      return fullUrl.replace(baseUrl, '');
+
+    async uploadBackgroundImg() {
+      try {
+        console.log(this.backgroundPic); 
+
+        axios.post(
+          "http://localhost:5000/api/v1/users/uploadbackimage",
+          { image: this.backgroundPic },
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "multipart/form-data", 
+            },
+          }
+        );
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
     },
+
     update() {
+      //this.updatedetails();
+      this.uploadBackgroundImg();
       console.log(this.userr);
-      this.updatedetails();
     },
   },
 };

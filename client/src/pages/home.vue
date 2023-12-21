@@ -6,10 +6,11 @@
       <div class=" w-1/2 mt-32 pl-5 ">
         <h1 class="text-3xl text-[#388aef] font-bold">Academia</h1>
         <p class="my-5 text-start text-lg">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni,
-          eligendi. Obcaecati ducimus error repellendus, necessitatibus eum
-          cupiditate itaque recusandae accusantium laborum. Quos corporis
-          dignissimos quas voluptatum accusantium hic animi minus.
+          Where scientific papers meet shared thoughts. 
+          Explore, share, and discuss the latest research with a global community of 
+          like-minded individuals. Join the conversation and fuel your intellectual 
+          journey in a space designed for collaboration and discovery. 
+          Academia: Connecting minds, advancing knowledge.
         </p>
         <button><router-link to="/login">Login</router-link></button>
         <button><router-link to="/register">Register</router-link></button>

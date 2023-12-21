@@ -121,7 +121,7 @@
   </div>
   <!--mobile sidebar -->
   <footer
-    class="fixed bottom-0 left-0 z-50 w-full h-fit 
+    class="fixed bottom-0 left-0 z-20 w-full h-fit 
     bg-white gap-2 mobile:hidden p-1 overflow-y"
   >
     <div class="flex w-full h-full justify-evenly">
@@ -251,7 +251,7 @@ export default {
       shownotif: false,
     };
   },
-  mounted() {
+  beforeMount() {
     // Invoke getuser method when the component is mounted
     this.getuser();
     this.getposts();
@@ -267,7 +267,7 @@ export default {
         );
 
         this.user = response.data.user;
-        //console.log(this.user);
+        console.log(this.user);
       } catch (error) {
         console.error("Error fetching user information:", error);
         console.error("Error response data:", error.response.data);
