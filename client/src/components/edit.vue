@@ -220,7 +220,7 @@ export default {
           { name: this.userName, info: this.userInfo },
           { withCredentials: true }
         );
-        window.location.reload();
+       
       } catch (error) {
         console.error("Error updating name and info:", error);
       }
@@ -284,6 +284,7 @@ export default {
       setTimeout(() => {
         this.uploadMessage = "";
       }, 3000);
+      window.location.reload();
     },
 
     async uploadProfileImg() {
@@ -317,12 +318,21 @@ export default {
       setTimeout(() => {
         this.uploadMessage = "";
       }, 3000);
+      window.location.reload();
     },
 
     update() {
-      this.updatedetails();
-      this.uploadBackgroundImg();
-      this.uploadProfileImg();
+      if (this.userName || this.userInfo) {
+        this.updatedetails();
+      } 
+
+      if (this.backgroundPic) {
+        this.uploadBackgroundImg();
+
+      }
+      if (this.profilePic) {
+        this.uploadProfileImg();
+      }
       console.log(this.userr);
      
     },

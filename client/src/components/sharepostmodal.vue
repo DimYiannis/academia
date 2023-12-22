@@ -3,7 +3,9 @@
     class="w-full h-full bg-black/30 left-0 top-0 fixed grid justify-items-center z-10"
     @click.self="closemodal"
   >
-    <div class="w-full h-full mobile:w-[500px] mobile:h-fit relative mt-10 rounded-md bg-white z-20">
+    <div
+      class="w-full h-full mobile:w-[500px] mobile:h-fit relative mt-10 rounded-md bg-white z-20"
+    >
       <div class="grid gap-4 m-5">
         <div>
           <svg
@@ -26,7 +28,17 @@
           </svg>
         </div>
         <div class="flex mt-5">
-          <img class="rounded-full w-10 h-10 mt-2" :src="user.profileImg" />
+          <div
+            class="rounded-full w-10 h-10 mt-2"
+            :style="{
+              backgroundImage: user.profileImg
+                ? 'url(http://localhost:5000' + user.profileImg + ')'
+                : 'none',
+              backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+            }"
+          ></div>
           <input
             v-model="postContent"
             type="text"
@@ -47,7 +59,7 @@
 export default {
   data() {
     return {
-      postContent: '',
+      postContent: "",
     };
   },
   props: {
@@ -70,10 +82,9 @@ export default {
         content: this.postContent,
       };
 
-      
       this.$emit("share-post", sharedPost);
-     
-      this.postContent = '';
+
+      this.postContent = "";
     },
   },
 };
