@@ -68,7 +68,11 @@
         </div>
       </div>
 
-      <div v-else class="post border p-4 mb-4 rounded-3xl" v-for="(i, index) of posts">
+      <div
+        v-else
+        class="post border p-4 mb-4 rounded-3xl"
+        v-for="(i, index) of posts"
+      >
         <div class="grid post-header items-center mb-2">
           <h1 class="text-lg font-semibold">
             <router-link
@@ -89,8 +93,6 @@
         <div class="flex justify-between mt-3">
           <div class="flex items-center">
             <button
-              @mouseover=" setTipIndex(index); tip=true"
-              @mouseleave="setTipIndex(-1); tip=false"
               class="disabled:cursor-progress"
               @click="addLike(i._id)"
               :disabled="likeLoading"
@@ -114,7 +116,9 @@
               </svg>
             </button>
 
-            <button @click="modal(i._id)">
+            <button
+              @click="modal(i._id)"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="26"
@@ -162,13 +166,6 @@
             </button>
           </div>
         </div>
-
-        <div
-          v-show="tip && tipIndex === index"
-          class="absolute z-10 px-3 py-2 text-sm font-medium inline-block text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm dark:bg-gray-700"
-        >
-          like
-        </div>
       </div>
     </main>
   </div>
@@ -197,8 +194,6 @@ export default {
       bookmarkLoading: false,
       message: "",
       showTooltip: false,
-      tip: false,
-      tipIndex: -1,
     };
   },
   props: {
@@ -218,6 +213,7 @@ export default {
   components: {
     sharepostmodal,
   },
+
   methods: {
     async addBookmark(postId) {
       try {
@@ -301,9 +297,6 @@ export default {
       this.postId = post_Id;
       this.showmodal = !this.showmodal;
       //console.log(this.showmodal);
-    },
-    setTipIndex(index) {
-      this.tipIndex = index;
     },
   },
 };

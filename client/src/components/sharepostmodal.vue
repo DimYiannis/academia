@@ -32,7 +32,7 @@
             class="rounded-full w-10 h-10 mt-2"
             :style="{
               backgroundImage: user.profileImg
-                ? 'url(http://localhost:5000' + user.profileImg + ')'
+                ? `url(http://localhost:5000${user.profileImg})`
                 : 'none',
               backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
               backgroundPosition: 'center',
@@ -48,7 +48,10 @@
           />
         </div>
         <div class="border-t-2 flex justify-end">
-          <button @click="sharePost" class="font-semibold mt-4">Post</button>
+          <button 
+          @click="sharePost" 
+          class="font-semibold mt-4" 
+          :disabled="sharingPost">{{sharingPost ? 'Posting..': 'Post'}}</button>
         </div>
       </div>
     </div>
@@ -60,6 +63,7 @@ export default {
   data() {
     return {
       postContent: "",
+      sharingPost: false,
     };
   },
   props: {
@@ -76,15 +80,28 @@ export default {
     closemodal() {
       this.$emit("close-modal");
     },
-    sharePost() {
+    async sharePost() {
+      this.sharingPost = true;
+
       const sharedPost = {
         postId: this.postId,
         content: this.postContent,
       };
+      try {
+        //  asynchronous operation
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      this.$emit("share-post", sharedPost);
+        // Emit the event when sharing is successful
+        this.$emit("share-post", sharedPost);
 
-      this.postContent = "";
+        // Clear the input field
+        this.postContent = "";
+
+      } catch (error) {
+        console.error("Error sharing post:", error);
+      } finally {
+        this.sharingPost = false; 
+      }
     },
   },
 };

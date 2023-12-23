@@ -334,6 +334,10 @@ export default {
         this.uploadProfileImg();
       }
       console.log(this.userr);
+      this.uploadMessage = "No new modifications detected."
+      setTimeout(() => {
+        this.uploadMessage = "";
+      }, 3000);
      
     },
   },
