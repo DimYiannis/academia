@@ -60,7 +60,13 @@ app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
   
 app.get("/api/v1", (req, res) => {
   console.log(req.signedCookies);
-  res.send("academia");
+  res.cookie('token', 'someToken', {
+    path: '/',
+    expires: new Date('2023-12-24T17:20:31.000Z'),
+    httpOnly: true,
+    secure: true, // Set to true for HTTPS connections
+    sameSite: 'None', // Set to 'None' for cross-origin requests
+  });
 });
 
 

@@ -260,7 +260,7 @@ export default {
     async getuser() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/users/showUser",
+          "https://academia-backend-5d0w.onrender.com/api/v1/users/showUser",
           {
             withCredentials: true,
           }
@@ -277,7 +277,7 @@ export default {
     logout() {
       try {
         axios
-          .get("http://localhost:5000/api/v1/auth/logout", {
+          .get("https://academia-backend-5d0w.onrender.com/api/v1/auth/logout", {
             withCredentials: true,
           })
           .then((response) => {
@@ -291,7 +291,7 @@ export default {
     async getposts() {
       this.loading = true;
       try {
-        const response = await axios.get("http://localhost:5000/api/v1/posts", {
+        const response = await axios.get("https://academia-backend-5d0w.onrender.com/api/v1/posts", {
           withCredentials: true,
         });
 
