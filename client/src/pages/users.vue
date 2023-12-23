@@ -135,7 +135,6 @@
                   <!-- You can add other multimedia content (images, videos) here -->
                 </div>
               </div>
-              <button @click="deletepost(i._id)">Delete Post</button>
             </div>
 
             <section class="mt-5">
@@ -159,25 +158,7 @@
                         class="border p-4 mb-4 rounded-3xl grid"
                         v-for="i of likedposts"
                       >
-                        <svg
-                          @click="unlike(i._id)"
-                          class="cursor-pointer justify-self-end"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="26"
-                          height="26"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            fill="currentColor"
-                            fill-rule="evenodd"
-                            d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 
-                      0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 
-                      13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12L5.47 
-                      6.53a.75.75 0 0 1 0-1.06Z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-
+                        
                         <div
                           v-for="j in [i.postDetails]"
                           class="p-2 mx-6 my-4 border border-[#388aef] rounded-3xl"
