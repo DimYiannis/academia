@@ -225,7 +225,7 @@ export default {
       const userId = this.$route.params._id;
       try {
         const response = await axios.get(
-          `https://academia-backend-5d0w.onrender.com/api/v1/users/${userId}`,
+          `http://localhost:5000/api/v1/users/${userId}`,
           {
             withCredentials: true,
           }
@@ -241,7 +241,7 @@ export default {
       const userId = this.$route.params._id;
       try {
         const response = await axios.get(
-          `https://academia-backend-5d0w.onrender.com/api/v1/users/${userId}/posts`,
+          `http://localhost:5000/api/v1/users/${userId}/posts`,
           {
             withCredentials: true,
           }
@@ -261,7 +261,7 @@ export default {
       const userId = this.$route.params._id;
       try {
         const response = await axios.get(
-          `https://academia-backend-5d0w.onrender.com/api/v1/likes/${userId}/likes`,
+          `http://localhost:5000/api/v1/likes/${userId}/likes`,
           {
             withCredentials: true,
           }

@@ -84,7 +84,7 @@ export default {
       try {
         this.loading = true;
         const response = await axios.get(
-          "https://academia-backend-5d0w.onrender.com/api/v1/sharedposts",
+          "http://localhost:5000/api/v1/sharedposts",
           {
             withCredentials: true,
           }
