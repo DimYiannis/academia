@@ -46,7 +46,7 @@ app.use(fileUpload());
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(
   cors({
-    origin: ['https://academia-frontend.onrender.com'],
+    origin: [ 'http://localhost:5173'],
     credentials: true,
   })
 );
