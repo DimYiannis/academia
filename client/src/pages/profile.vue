@@ -36,7 +36,7 @@
           class="h-[250px] grid place-items-center mr-3"
           :style="{
             backgroundImage: user.backgroundImg
-              ? 'url(http://localhost:5000'  + user.backgroundImg + ')'
+              ? 'https://academia-backend-5d0w.onrender.com'  + user.backgroundImg + ')'
               : 'none',
             backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
             backgroundPosition: 'center',
@@ -51,7 +51,7 @@
               class="rounded-full ml-4 w-20 h-32 absolute -top-16 left-2 border-2"
               :style="{
                 backgroundImage: user.profileImg
-                  ? 'url(http://localhost:5000' + user.profileImg + ')'
+                  ? 'url(https://academia-backend-5d0w.onrender.com' + user.profileImg + ')'
                   : 'none',
                 backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
                 backgroundPosition: 'center',
@@ -292,7 +292,7 @@ export default {
       this.loading = true;
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/sharedposts/mysharedposts",
+          "https://academia-backend-5d0w.onrender.com/api/v1/sharedposts/mysharedposts",
           {
             withCredentials: true,
           }
@@ -315,7 +315,7 @@ export default {
     async deletepost(postId) {
       try {
         await axios.delete(
-          `http://localhost:5000/api/v1/sharedposts/${postId}`,
+          `https://academia-backend-5d0w.onrender.com/api/v1/sharedposts/${postId}`,
           {
             withCredentials: true,
           }
@@ -329,7 +329,7 @@ export default {
     },
     async getlikedposts() {
       try {
-        const response = await axios.get("http://localhost:5000/api/v1/likes", {
+        const response = await axios.get("https://academia-backend-5d0w.onrender.com/api/v1/likes", {
           withCredentials: true,
         });
 
@@ -343,7 +343,7 @@ export default {
     },
     async unlike(postId) {
       try {
-        await axios.delete(`http://localhost:5000/api/v1/likes/${postId}`, {
+        await axios.delete(`https://academia-backend-5d0w.onrender.com/api/v1/likes/${postId}`, {
           withCredentials: true,
         });
 
