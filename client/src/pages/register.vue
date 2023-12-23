@@ -8,7 +8,7 @@
     </p>
     <form class="grid gap-5 mx-10 w-fit" @submit.prevent="handleSubmit">
       <h1 class="text-center font-semibold text-lg">
-        Why wait? Sign up now and start shopping
+        Sign up now and start Connecting
       </h1>
 
       <label class="">Full Name:</label>

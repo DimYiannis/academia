@@ -77,7 +77,7 @@
                 class="absolute -top-24 left-2 rounded-full w-16 h-28 ml-3 border-2"
                 :style="{
                   backgroundImage: userr.profileImg
-                    ? 'url(http://localhost:5000' + userr.profileImg + ')'
+                    ? 'url(http://localhost:5000)' + userr.profileImg + ')'
                     : 'none',
                   backgroundColor: userr.profileImg ? '' : '#B0A8B9',
                   backgroundPosition: 'center',
