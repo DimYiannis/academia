@@ -292,7 +292,7 @@ export default {
       this.loading = true;
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/v1/sharedposts/mysharedposts",
+          "https://academia-backend-5d0w.onrender.com/api/v1/sharedposts/mysharedposts",
           {
             withCredentials: true,
           }
@@ -315,7 +315,7 @@ export default {
     async deletepost(postId) {
       try {
         await axios.delete(
-          `http://localhost:5000/api/v1/sharedposts/${postId}`,
+          `https://academia-backend-5d0w.onrender.com/api/v1/sharedposts/${postId}`,
           {
             withCredentials: true,
           }
@@ -329,7 +329,7 @@ export default {
     },
     async getlikedposts() {
       try {
-        const response = await axios.get("http://localhost:5000/api/v1/likes", {
+        const response = await axios.get("https://academia-backend-5d0w.onrender.com/api/v1/likes", {
           withCredentials: true,
         });
 
@@ -343,7 +343,7 @@ export default {
     },
     async unlike(postId) {
       try {
-        await axios.delete(`http://localhost:5000/api/v1/likes/${postId}`, {
+        await axios.delete(`https://academia-backend-5d0w.onrender.com/api/v1/likes/${postId}`, {
           withCredentials: true,
         });
 

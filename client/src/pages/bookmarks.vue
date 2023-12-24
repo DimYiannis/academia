@@ -91,7 +91,7 @@ export default {
       try {
         this.loading = true;
         const response = await axios.get(
-          "http://localhost:5000/api/v1/bookmarks",
+          "https://academia-backend-5d0w.onrender.com/api/v1/bookmarks",
           {
             withCredentials: true,
           }
@@ -109,7 +109,7 @@ export default {
       try {
         //console.log(this.bookmarks);
         await axios.delete(
-          `http://localhost:5000/api/v1/bookmarks/${bookmarkId}`,
+          `https://academia-backend-5d0w.onrender.com/api/v1/bookmarks/${bookmarkId}`,
           {
             withCredentials: true,
           }
