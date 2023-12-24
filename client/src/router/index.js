@@ -40,7 +40,7 @@ const routes = [
         component: profile,
       },
       {
-        path: '/posts',
+        path: '/https://academia-frontend.onrender.com/posts',
         name: 'post',
         component: post,
       },
