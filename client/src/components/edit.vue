@@ -284,7 +284,6 @@ export default {
       setTimeout(() => {
         this.uploadMessage = "";
       }, 3000);
-      window.location.reload();
     },
 
     async uploadProfileImg() {
@@ -334,7 +333,9 @@ export default {
         this.uploadProfileImg();
       }
       console.log(this.userr);
-      this.uploadMessage = "No new modifications detected."
+      if (!this.userName && !this.userInfo && !this.backgroundPic && !this.profilePic) {
+        this.uploadMessage = "No new modifications detected."
+      }
       setTimeout(() => {
         this.uploadMessage = "";
       }, 3000);

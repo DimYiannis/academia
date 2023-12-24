@@ -1,9 +1,6 @@
 <template>
   <div class="grid h-fit mt-10 justify-center">
-    <p
-      class="bg-sky-500/40 text-white rounded-lg p-3 mt-3"
-      v-show="showError"
-    >
+    <p class="bg-sky-500/40 text-white rounded-lg p-3 mt-3" v-show="showError">
       {{ errormsg }}
     </p>
     <form class="grid gap-5 mx-10 w-fit" @submit.prevent="handleSubmit">
@@ -30,7 +27,7 @@
         <button @click="register" class=" ">Join Now</button>
         <div class="place-self-start text-[10px] flex gap-1">
           <p>Already have an account?</p>
-          <a class="cursor-pointer underline underline-offset-1" href="/login"
+          <a class="cursor-pointer underline underline-offset-1" @click="login"
             >log in</a
           >
         </div>
@@ -65,20 +62,23 @@ export default {
       //   console.log("terms accepted: ", this.terms);
       // }
     },
-    
+
     register() {
       axios
-        .post("https://academia-backend-5d0w.onrender.com/api/v1/auth/register", {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-        })
+        .post(
+          "https://academia-backend-5d0w.onrender.com/api/v1/auth/register",
+          {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+          }
+        )
         .then((response) => {
-          console.log('Redirecting to login page');
+          console.log("Redirecting to login page");
           console.log(response.data);
-          alert('Welcome to Academia!');
+          alert("Welcome to Academia!");
           // redirect to another page or show a success message.
-          this.$router.push({ name: 'login' });
+          this.$router.push({ name: "login" });
         })
         .catch((error) => {
           console.error("Registration error:", error.response);
@@ -93,6 +93,9 @@ export default {
             this.showError = false;
           }, 5000);
         });
+    },
+    login() { 
+      this.$router.push({ name: "login" });
     },
   },
 };
