@@ -34,7 +34,7 @@
           class="mt-2 h-[250px] bg-cover bg-center mr-1"
           :style="{
             backgroundImage: user.backgroundImg
-              ? 'url(http://localhost:5000' + user.backgroundImg + ')'
+              ? 'url(https://academia-backend-5d0w.onrender.com' + user.backgroundImg + ')'
               : 'none',
             backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
             backgroundPosition: 'center',
@@ -47,7 +47,7 @@
               class="rounded-full ml-4 w-20 h-32 absolute -top-16 left-2"
               :style="{
                 backgroundImage: user.profileImg
-                  ? 'url(http://localhost:5000' + user.profileImg + ')'
+                  ? 'url(https://academia-backend-5d0w.onrender.com' + user.profileImg + ')'
                   : 'none',
                 backgroundColor: user.backgroundImage ? '' : '#B0A8B9',
                 backgroundPosition: 'center',
