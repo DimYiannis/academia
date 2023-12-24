@@ -11,12 +11,12 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 // v2 is a must
-const cloudinary = require('cloudinary').v2
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
-})
+// const cloudinary = require('cloudinary').v2
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: process.env.CLOUD_API_KEY,
+//   api_secret: process.env.CLOUD_API_SECRET,
+// })
 
 const rateLimiter = require("express-rate-limit");
 const helmet = require("helmet");
