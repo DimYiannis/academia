@@ -283,7 +283,7 @@ export default {
           .then((response) => {
             console.log(response);
           });
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: "index" });
       } catch (error) {
         console.error("Error:", error);
       }
